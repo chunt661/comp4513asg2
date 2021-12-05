@@ -1,0 +1,47 @@
+main#browse {
+    padding: var(--padding-lg);
+    
+    height: var(--panel-height);
+    
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+ul.results {
+    /*
+    Un-comment to make ONLY the results scroll
+    */
+    display: flex;
+    overflow-y: auto;
+    
+}
+
+.results-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sort-container {
+    display: flex;
+    grid-gap: 1rem;
+}
+
+.sort-button {
+    display: grid;
+    grid-template-columns: 2em 12px;
+    align-items: center;
+    
+    user-select: none;
+    cursor: pointer;
+}
+
+.sort-button > span:first-child {
+    margin-right: .25em;
+}
+
+.sort-arrows {
+    display: flex;
+    flex-direction: column;
+}

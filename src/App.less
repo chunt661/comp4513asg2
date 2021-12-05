@@ -1,0 +1,52 @@
+@import '~antd/dist/antd.less';
+
+:root {
+    /*
+    Some variables are grabbed from less and stored here in CSS just to make my
+    life a little easier. Recompiling a .less file is SLOW.
+    */
+    
+    --layout-header-height: @layout-header-height;
+    
+    --primary-color: @primary-color;
+    --info-color: @info-color;
+    --text-color: @text-color;
+    --text-color-secondary: @text-color-secondary;
+    
+    --padding-lg: @padding-lg;
+    
+    /*
+    Regular variables below
+    */
+    
+    /* Height of content panels, i.e. full screen height minus header */
+    --panel-height: calc(100vh - var(--layout-header-height));
+}
+
+*, *:before, *:after {
+    box-sizing: border-box;
+}
+
+ul { padding: 0; }
+li { list-style: none; }
+
+.logo {
+    user-select: none;
+}
+
+button {
+    font-weight: 500 !important;
+}
+
+.ant-btn-primary {
+    text-transform: uppercase;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+}
+
+header .logo {
+    font-size: 16pt;
+}

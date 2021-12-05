@@ -1,0 +1,65 @@
+.ReactCollapse--collapse {
+  transition: height 200ms;
+}
+
+.filters {
+    display: flex;
+    grid-gap: 2rem;
+    justify-content: center;
+    
+    margin: 0 auto;
+}
+
+.filters legend {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.filters .checkbox {
+    width: 75px;
+}
+
+.filters .year-input {
+    margin-bottom: .5rem;
+}
+
+.filters .button-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.search-container {
+    display: flex;
+    justify-content: space-between;
+    grid-gap: 3rem;
+    
+    width: 100%;
+    margin-bottom: 1rem !important;
+}
+
+.search-container .toggle-btn {
+    min-width: 10em !important;
+    max-width: 10em !important;
+}
+
+.search-container > div > div:first-of-type {
+    padding: 0 !important;
+}
+
+.search-container > div > div:first-of-type button {
+    right: 0 !important;
+}
+
+.search span {
+    background: none;
+}
+
+.search input {
+    border-radius: 32px;
+}
+
+.search button {
+    border-bottom-right-radius: 32px !important;
+    border-top-right-radius: 32px !important;
+}

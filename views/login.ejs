@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+    </head>
+    <body>
+        <div>
+            <h1>Log In</h1>
+            <form action="/login" method="post">
+                <fieldset>
+                    <label>Email</label>
+                    <input type="email" name="email" />
+                </fieldset>
+                <fieldset>
+                    <label>Password</label>
+                    <input type="password" name="password" />
+                </fieldset>
+                <div>
+                    <button type="submit">Login</button>
+                </div>
+                <% if (message) { %>
+                    <p><%= message %></p>
+                <% } %>
+            </form>
+        </div>
+    </body>
+</html>

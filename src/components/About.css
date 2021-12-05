@@ -1,0 +1,8 @@
+.about-modal h1 {
+    margin-bottom: 0 !important;
+}
+
+.about-modal .list-container {
+    height: 128px;
+    overflow-y: auto;
+}
