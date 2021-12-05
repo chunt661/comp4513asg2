@@ -10,8 +10,11 @@ const flash = require('express-flash');
 const cookieParser = require('cookie-parser');
 const passport = require('passport');
 
+const Play = require('./models/Play');
 const User = require('./models/User');
 const utils = require('./scripts/utils.js');
+
+const router = require('./scripts/apiRouter.js');
 
 require('./scripts/dbConnector.js').connect();
 
@@ -25,7 +28,6 @@ app.use(express.urlencoded({extended: true}));
 app.set('views', './views');
 app.set('view engine', 'ejs');
 
-app.use(cookieParser('oreo'));
 app.use(session({
     secret: process.env.SECRET,
     resave: true,
@@ -40,11 +42,17 @@ app.use(flash());
 require('./scripts/auth.js');
 
 
-/* Routes */
+/* React routes */
 
 app.get('/', utils.ensureAuthenticated, (req, res) => {
     res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
+
+/* API routing */
+
+router.registerPlaysList(app, Play);
+router.registerPlayDetails(app, Play);
+router.registerUserDetails(app, User);
 
 /* Login routing */
 

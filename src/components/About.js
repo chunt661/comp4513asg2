@@ -3,6 +3,8 @@ import { Modal, List, Divider } from 'antd';
 import './About.css';
 
 const About = (props) => {
+    const apiLinkPrefix = 'http://localhost:8081/api/';
+    
     const libraries = [
         {
             title: 'react-collapse',
@@ -39,8 +41,14 @@ const About = (props) => {
             onOk={props.closeModal}>
             <h1>COMP 4513 Assignment 2</h1>
             <p>Chris Hunter</p>
-            <p>shakespea.re: A Shakespeare play browser. Made with React and Ant Design components.</p>
+            <p>shakespea.re: A Shakespeare play browser. Front-end made with React and Ant Design components.</p>
             <a href='https://github.com/chunt661/comp4513asg2'>GitHub repository</a>
+            <h2>API Links</h2>
+            <div className='link-container'>
+                <a href={apiLinkPrefix + 'list/'}>Plays List</a>
+                <a href={apiLinkPrefix + 'play/alls_well_that_ends_well'}>Single Play</a>
+                <a href={apiLinkPrefix + 'user/1'}>User Details</a>
+            </div>
             <Divider />
             <h2>Libraries</h2>
             <div className='list-container'>
