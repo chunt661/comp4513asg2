@@ -65,6 +65,17 @@ const Details = (props) => {
                     tab='Characters'
                     key='2'
                     {...(!play.filename && {disabled: true})}>
+                    <List
+                        itemLayout='horizontal'
+                        dataSource={play.playText.persona}
+                        renderItem={player => (
+                            <List.Item>
+                                <List.Item.Meta
+                                    title={player.player}
+                                    description={player.desc} />
+                            </List.Item>
+                        )}
+                        />
                 </TabPane>
                 <TabPane
                     tab='Text'
