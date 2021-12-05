@@ -41,7 +41,7 @@ const Browse = (props) => {
             let data = JSON.parse(localStorage.getItem('plays'));
             if (!data) {
                 try {
-                    const url = 'https://www.randyconnolly.com//funwebdev/3rd/api/shakespeare/list.php';
+                    const url = 'http://localhost:8081/api/list';
                     fetch(url)
                         .then(response => response.json())
                         .then(data => {

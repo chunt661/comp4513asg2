@@ -15,6 +15,8 @@ const registerPlaysList = (app, Play) => {
     
     app.get('/api/list', utils.ensureAuthenticated, (req, res) => {
         Play.find({}, projection, (err, data) => {
+            res.set('Access-Control-Allow-Origin', '*');
+            
             if (err) {
                 res.json({message: 'Could not connect to plays collection.'});
             } else {
@@ -30,6 +32,8 @@ Registers a listener for requests for complete information on a given play.
 const registerPlayDetails = (app, Play) => {
     app.get('/api/play/:id', utils.ensureAuthenticated, (req, res) => {
         Play.find({id: req.params.id}, (err, data) => {
+            res.set('Access-Control-Allow-Origin', '*');
+            
             if (err) {
                 res.json({message: 'Could not find the specified play.'})
             } else {
@@ -54,6 +58,8 @@ const registerUserDetails = (app, User) => {
     
     app.get('/api/user/:id', utils.ensureAuthenticated, (req, res) => {
         User.find({id: req.params.id}, projection, (err, data) => {
+            res.set('Access-Control-Allow-Origin', '*');
+            
             if (err) {
                 res.json({message: 'Could not find the specified user.'});
             } else {
