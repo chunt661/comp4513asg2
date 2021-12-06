@@ -10,6 +10,7 @@
     --layout-header-height: @layout-header-height;
     
     --primary-color: @primary-color;
+    --primary-color-hover: @primary-color-hover;
     --info-color: @info-color;
     --text-color: @text-color;
     --text-color-secondary: @text-color-secondary;
@@ -48,4 +49,25 @@ button {
 
 .ant-btn-primary {
     text-transform: uppercase;
+}
+
+/*
+Custom scrollbar
+*/
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--divider-color);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-color-hover);
 }
