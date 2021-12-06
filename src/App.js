@@ -4,6 +4,7 @@ import {BrowserRouter, Route} from 'react-router-dom';
 
 import Nav from './components/Nav.js';
 import Browse from './components/Browse.js';
+import Details from './components/Details.js';
 import Favourites from './components/Favourites.js';
 import FavouritesContextProvider from './components/FavouritesContext.js';
 
@@ -22,6 +23,17 @@ const App = () => {
                             <Favourites visible={true} />
                             <Browse query='' />
                             </FavouritesContextProvider>
+                    </Layout>
+                </Layout>
+            </Route>
+            <Route path='/play/:id'>
+                <Layout>
+                    <Nav />
+                    <Layout>
+                        <FavouritesContextProvider>
+                            <Favourites visible={false} />
+                            <Details />
+                        </FavouritesContextProvider>
                     </Layout>
                 </Layout>
             </Route>

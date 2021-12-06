@@ -16,17 +16,6 @@
     padding: 8px 16px;
 }
 
-.result .favourite-btn {
-    border: none;
-    background: none !important;
-    box-shadow: none;
-    margin-left: auto;
-}
-
-.result .favourite-btn span {
-    color: inherit;
-}
-
 .result .title,
 .result .year {
     font-size: 14pt;

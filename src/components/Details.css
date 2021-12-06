@@ -1,0 +1,128 @@
+main#details {
+    display: flex;
+    flex-direction: column;
+    color: white;
+    height: var(--panel-height);
+}
+
+.title-container {
+    background: var(--primary-color);
+    padding: var(--padding-md) var(--padding-lg);
+    margin-bottom: 1rem;
+    box-shadow: 0px 8px 12px -4px rgba(156, 162, 182, .6);
+}
+
+.title-container > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: .875rem;
+}
+
+.title-container h1 {
+    display: inline-block;
+    font-size: 2rem;
+    margin-right: 1rem;
+    
+    color: white;
+}
+
+.title-container button {
+    border: none;
+    box-shadow: none;
+}
+
+#details .ant-tabs-nav {
+    margin-bottom: 0;
+}
+
+#details .ant-tabs-content-holder {
+    background: white;
+    display: flex;
+}
+
+#details .ant-tabs-tabpane {
+    padding: var(--padding-sm);
+    display: flex;
+    flex-direction: column;
+}
+
+#details .content {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    padding: var(--padding-md);
+    z-index: 0;
+}
+
+.characters-tab {
+    overflow-y: auto;
+}
+
+/* Just a line that adds a shadow below the element above it */
+.shadow-line {
+    z-index: -1;
+    box-shadow: 0px 0px 12px 4px rgba(208, 216, 243, 0.6);
+}
+
+/*
+Play text formatting from the provided example
+*/
+#details section {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    
+    line-height: 1;
+}
+
+#details section h2,
+#details section h3,
+#details section h4 {
+    margin: 0;
+    padding: 0;
+    font-weight: 600;
+}
+
+#details section h2 {
+    margin-top: 5px;
+}
+
+#details section h4 {
+    border-bottom: 1px solid var(--text-color);
+    margin: 15px 0 5px 0;
+}
+
+#details section p.title {
+    font-weight: 600; 
+    margin: 0;
+}
+
+#details section p.direction {
+    margin: 0;
+    font-style: italic;
+    font-weight: 500;
+}
+
+#details section .speech span.speaker {
+    display: block;
+    margin-top: 12px;
+    font-weight: 700;
+}
+
+#details section .speech p {
+    margin: 0;
+}
+
+#details section .speech p .highlight {
+    background: var(--info-color);
+    color: white;
+    font-weight: 600;
+    border-radius: 4px;
+    padding: 0;
+}
+
+#details section .speech em {
+    font-style: italic;
+    display: block;
+    margin-top: 12px;
+}
