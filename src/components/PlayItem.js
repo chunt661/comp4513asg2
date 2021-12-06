@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { Button } from 'antd';
 import { BookFilled } from '@ant-design/icons';
 
@@ -9,10 +10,12 @@ import './PlayItem.css';
 An individual search result item.
 */
 const PlayItem = (props) => {
+    const href = '/play/' + props.play.id;
+    
     return (
         <li className='result'>
             <div>
-                <span className='title'>{props.play.title}</span>
+                <Link className='title' to={href}>{props.play.title}</Link>
                 <span className='year'>{props.play.likelyDate}</span>
             </div>
             <FavouriteButton play={props.play} />
@@ -25,7 +28,9 @@ const PlayItem = (props) => {
                     </span>
                 )}
             </div>
-            <Button type='primary'>View</Button>
+            <Link to={href}>
+                <Button type='primary'>View</Button>
+            </Link>
         </li>
     );
 };
