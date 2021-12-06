@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Input, Checkbox, Select, Button, Row, Col } from 'antd';
-import { FilterFilled } from '@ant-design/icons';
+import { FilterFilled, FilterOutlined } from '@ant-design/icons';
 import { Collapse } from 'react-collapse';
 
 import './Filters.css';
@@ -20,17 +20,21 @@ const Filters = (props) => {
     
     /*
     This is basically a flag that tells the components whether they should
-    clear their inputs.
-    See the comment in the YearInput component for more explanation.
+    clear their inputs. Essentially the opposite of a dirty flag.
+    
+    See the comment in the YearInput component below for more explanation.
     */
     const [shouldClear, setShouldClear] = useState(false);
     
+    /**
+    Called whenever the user types into the search bar.
+    */
     const handleQuery = (e) => {
         setQuery(e.target.value);
         setShouldClear(false);
     };
     
-    /*
+    /**
     Updates the 'before year' state value. Called whenever relevant input is
     received. If the 'before' checkbox is unchecked, the state will be set to
     blank instead of what has been inputted.
@@ -40,7 +44,7 @@ const Filters = (props) => {
         setShouldClear(false);
     };
     
-    /*
+    /**
     Updates the 'after year' state value. Called whenever relevant input is
     received. If the 'after' checkbox is unchecked, the state will be set to
     blank instead of what has been inputted.
@@ -50,7 +54,7 @@ const Filters = (props) => {
         setShouldClear(false);
     };
     
-    /*
+    /**
     Updates the genre state. Called whenever a new genre is selected.
     */
     const handleGenre = (v) => {
@@ -58,7 +62,7 @@ const Filters = (props) => {
         setShouldClear(false);
     };
     
-    /*
+    /**
     Clears all inputs and resets the search filters. Called when the
     'clear filters' button is clicked
     */
@@ -72,15 +76,15 @@ const Filters = (props) => {
         applyFilters('', '', []);
     };
     
-    /*
+    /**
     Applies filters using the current values. Called when the 'apply filters'
     button is clicked.
     */
     const handleApply = () => { applyFilters() };
-    
     const toggleCollapse = () => { setCollapsed(!collapsed) };
     
-    /*
+    
+    /**
     Applies the given filters to the search results. The filter values are the
     appropriate state values by default, but can be modified if state is
     unreliable (e.g. when setting state and then immediately applying
@@ -150,7 +154,7 @@ const Filters = (props) => {
 };
 
 
-/*
+/**
 A checkbox and text field for entering year values.
 */
 const YearInput = (props) => {
@@ -161,7 +165,7 @@ const YearInput = (props) => {
     const shouldClear = props.shouldClear;
     const onChange = props.onChange;
     
-    /*
+    /**
     Pressing the 'clear filters' button sets shouldClear to true. Meanwhile,
     useEffect is used to monitor the shouldClear variable. Whenever it is set
     to true, the values are erased. When user input is detected, shouldClear is
@@ -185,7 +189,7 @@ const YearInput = (props) => {
         }
     }, [shouldClear, onChange]);
     
-    /*
+    /**
     Sets the checkbox status. Called whenever the checkbox is modified.
     */
     const handleCheck = (e) => {
@@ -194,7 +198,7 @@ const YearInput = (props) => {
         props.onChange(checked, year);
     };
     
-    /*
+    /**
     Updates state values according to the input entered in the box. Called
     whenever input is received. If the input is not empty, the checkbox will
     be set to checked. Otherwise, the checkbox is set to unchecked.
