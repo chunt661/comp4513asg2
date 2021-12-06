@@ -7,7 +7,7 @@ main#details {
 
 .title-container {
     background: var(--primary-color);
-    padding: var(--padding-md);
+    padding: var(--padding-md) var(--padding-lg);
     margin-bottom: 1rem;
     box-shadow: 0px 8px 12px -4px rgba(156, 162, 182, .6);
 }
@@ -103,7 +103,7 @@ Play text formatting from the provided example
     font-weight: 500;
 }
 
-#details section .speech span {
+#details section .speech span.speaker {
     display: block;
     margin-top: 12px;
     font-weight: 700;
@@ -111,6 +111,14 @@ Play text formatting from the provided example
 
 #details section .speech p {
     margin: 0;
+}
+
+#details section .speech p .highlight {
+    background: var(--info-color);
+    color: white;
+    font-weight: 600;
+    border-radius: 4px;
+    padding: 0;
 }
 
 #details section .speech em {
@@ -131,11 +139,19 @@ EVERYTHING is flex!!
     overflow-y: auto;
 }
 
+#play-viewer h3:not(:first-child) {
+    margin-top: 1rem;
+}
+
 #play-viewer aside {
     display: flex;
     flex-direction: column;
-    grid-gap: 16px;
-    width: 250px;
+    grid-gap: 8px;
+    min-width: 250px;
+}
+
+#play-viewer aside p {
+    margin: 0;
 }
 
 #play-viewer section {

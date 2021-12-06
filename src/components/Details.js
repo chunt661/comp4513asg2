@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
 import { useParams, withRouter } from 'react-router-dom';
-import { Layout, Tabs, Row, Col, List, Select, Button, Divider } from 'antd';
+import Highlighter from 'react-highlight-words';
+import { Layout, Tabs, Row, Col, List, Select, Input, Button, Divider, Tag, Typography } from 'antd';
 import { CloseCircleFilled } from '@ant-design/icons';
 
-import { FavouritesContext } from './FavouritesContext.js';
 import FavouriteButton from './FavouriteButton.js';
 
 import './Details.css';
@@ -11,6 +11,8 @@ import './Details.css';
 const { Content } = Layout;
 const { TabPane } = Tabs;
 const { Option } = Select;
+const { Search } = Input;
+const { Text } = Typography;
 
 const Details = (props) => {
     const [ play, setPlay ] = useState([]);
@@ -121,6 +123,7 @@ const PlayViewer = (props) => {
     const [ currentAct, setAct ] = useState(props.acts[0]);
     const [ currentScene, setScene ] = useState(props.acts[0].scenes[0]);
     const [ currentPlayer, setPlayer ] = useState(null);
+    const [ searchWords, setSearchWords ] = useState([]);
     
     const textRef = useRef(null); // Reference for the text section element
     
@@ -131,6 +134,11 @@ const PlayViewer = (props) => {
             players.push(s.speaker);
         }
     });
+    
+    // Filter speeches if a player is selected
+    const speeches = currentPlayer ?
+            currentScene.speeches.filter(s => s.speaker == currentPlayer)
+            : currentScene.speeches;
     
     /**
     Resets the scroll position of the play text box. For resetting the view
@@ -175,6 +183,10 @@ const PlayViewer = (props) => {
         setPlayer(value);
     }
     
+    const handleSearch = (value) => {
+        setSearchWords(value.split(' '));
+    };
+    
     return (
         <div id='play-viewer'>
             <aside>
@@ -195,6 +207,13 @@ const PlayViewer = (props) => {
                         <Option value={p} key={p}>{p}</Option>
                     )) }
                 </Select>
+                <h3>Highlight Text</h3>
+                <Text type='secondary'>Enter each word to highlight, separated by spaces.</Text>
+                <Search
+                    placeholder='Enter search terms'
+                    onSearch={handleSearch}
+                    enterButton
+                    allowClear />
             </aside>
             <Divider type='vertical' />
             <section ref={textRef}>
@@ -205,11 +224,17 @@ const PlayViewer = (props) => {
                         <h4>{currentScene.name}</h4>
                         <p className='title'>{currentScene.title}</p>
                         <p className='direction'>{currentScene.stageDirection}</p>
-                        { currentScene.speeches.map(s => (
+                        { speeches.map(s => (
                             <div key={s._id} className='speech'>
                                 <span className='speaker'>{s.speaker}</span>
                                 { s.lines.map((line, i) => (
-                                    <p key={i}>{line}</p>
+                                    <p key={i}>
+                                        <Highlighter
+                                             highlightClassName="highlight"
+                                             searchWords={searchWords}
+                                             autoEscape={true}
+                                             textToHighlight={line} />
+                                    </p>
                                 ))}
                             </div>
                         )) }
