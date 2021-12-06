@@ -11,9 +11,13 @@ import './Details.css';
 const { Content } = Layout;
 const { TabPane } = Tabs;
 
+/**
+Play details view. The ID of the play to display is retrieved from the URL
+parameters, then loaded from either the API or local storage.
+*/
 const Details = (props) => {
     const [ play, setPlay ] = useState([]);
-    const { id } = useParams();
+    const { id } = useParams(); // URL parameter
     
     // Load play data
     useEffect( () => {
@@ -113,4 +117,6 @@ const Details = (props) => {
     );
 };
 
+// The withRouter wrapper allows useHistory to be used despite the fact that
+// this component is nested several nodes deep under the Route component
 export default withRouter(Details);

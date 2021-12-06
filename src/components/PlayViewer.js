@@ -75,6 +75,10 @@ const PlayViewer = (props) => {
         setPlayer(value);
     }
     
+    /**
+    Called when the user either submits or clears the search terms box. Updates
+    the list of words to highlight.
+    */
     const handleSearch = (value) => {
         setSearchWords(value.split(' '));
     };
