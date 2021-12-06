@@ -14,30 +14,28 @@ import './App.less';
 
 const App = () => {
     return (
-        <BrowserRouter>
-            <Route path='/' exact>
-                <Layout>
-                    <Nav />
+        <FavouritesContextProvider>
+            <BrowserRouter>
+                <Route path='/' exact>
                     <Layout>
-                        <FavouritesContextProvider>
+                        <Nav />
+                        <Layout>
                             <Favourites visible={true} />
                             <Browse query='' />
-                            </FavouritesContextProvider>
+                        </Layout>
                     </Layout>
-                </Layout>
-            </Route>
-            <Route path='/play/:id'>
-                <Layout>
-                    <Nav />
+                </Route>
+                <Route path='/play/:id'>
                     <Layout>
-                        <FavouritesContextProvider>
+                        <Nav />
+                        <Layout>
                             <Favourites visible={false} />
                             <Details />
-                        </FavouritesContextProvider>
+                        </Layout>
                     </Layout>
-                </Layout>
-            </Route>
-        </BrowserRouter>
+                </Route>
+            </BrowserRouter>
+        </FavouritesContextProvider>
     );
 }
 
