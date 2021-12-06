@@ -134,6 +134,7 @@ EVERYTHING is flex!!
 #play-viewer aside {
     display: flex;
     flex-direction: column;
+    grid-gap: 16px;
     width: 250px;
 }
 
