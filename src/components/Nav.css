@@ -1,0 +1,17 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    border-bottom: 1px solid var(--divider-color);
+}
+
+header .logo {
+    font-size: 16pt;
+    font-weight: 400;
+    
+    color: var(--text-color);
+    background: none !important;
+    
+    padding: 0;
+}

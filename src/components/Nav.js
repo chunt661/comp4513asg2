@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Layout, Button } from 'antd';
 
 import About from './About.js';
@@ -18,7 +19,11 @@ const Nav = (props) => {
     
     return (
         <Header>
-            <span className='logo'>shakespea.re</span>
+            <Link
+                className='logo'
+                to='/'>
+                shakespea.re
+            </Link>
             <div>
                 <Button type='text' onClick={openModal}>About</Button>
                 <Button type='text'>Account</Button>
