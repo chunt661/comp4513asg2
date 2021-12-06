@@ -26,6 +26,8 @@ const Filters = (props) => {
     */
     const [shouldClear, setShouldClear] = useState(false);
     
+    const FilterIcon = collapsed ? FilterFilled : FilterOutlined;
+    
     /**
     Called whenever the user types into the search bar.
     */
@@ -109,7 +111,7 @@ const Filters = (props) => {
                     onSearch={handleApply} />
                 <Button
                     className='toggle-btn'
-                    icon={<FilterFilled />}
+                    icon={<FilterIcon />}
                     onClick={toggleCollapse}>
                     { (collapsed ? 'Show' : 'Hide') + ' Filters'}
                 </Button>
