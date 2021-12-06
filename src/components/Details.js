@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, withRouter } from 'react-router-dom';
 import { Layout, Tabs, Row, Col, List, Select, Button } from 'antd';
+import { CloseCircleFilled } from '@ant-design/icons';
 
 import { FavouritesContext } from './FavouritesContext.js';
 import FavouriteButton from './FavouriteButton.js';
@@ -39,10 +40,6 @@ const Details = (props) => {
         getData();
     }, [id]);
     
-    const handleFavourite = () => {
-        
-    };
-    
     return (
         <Content id='details'>
             <div className='title-container'>
@@ -50,6 +47,11 @@ const Details = (props) => {
                     <h1>{play.title}</h1>
                     <FavouriteButton play={play} size='large' />
                 </span>
+                <Button
+                    shape='circle'
+                    icon={<CloseCircleFilled style={{ fontSize: '20pt' }} />}
+                    onClick={() => { props.history.goBack() }}
+                    ghost />
             </div>
             <Tabs defaultActiveKey='1'>
                 <TabPane tab='Details' key='1'>
@@ -178,4 +180,4 @@ const PlayText = (props) => {
     );
 };
 
-export default Details;
+export default withRouter(Details);
