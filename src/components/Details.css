@@ -1,0 +1,11 @@
+.title-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.title-container h1 {
+    display: inline-block;
+    font-size: 2rem;
+    margin-right: 1rem;
+}

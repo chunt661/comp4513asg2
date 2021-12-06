@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Layout, Tabs, Row, Col, List, Select } from 'antd';
+import { Layout, Tabs, Row, Col, List, Select, Button } from 'antd';
+
+import { FavouritesContext } from './FavouritesContext.js';
+import FavouriteButton from './FavouriteButton.js';
 
 import './Details.css';
 
@@ -10,7 +13,6 @@ const { Option } = Select;
 
 const Details = (props) => {
     const [ play, setPlay ] = useState([]);
-    
     const { id } = useParams();
     
     // Load play data
@@ -37,9 +39,18 @@ const Details = (props) => {
         getData();
     }, [id]);
     
+    const handleFavourite = () => {
+        
+    };
+    
     return (
         <Content id='details'>
-            <h1>{play.title}</h1>
+            <div className='title-container'>
+                <span>
+                    <h1>{play.title}</h1>
+                    <FavouriteButton play={play} size='large' />
+                </span>
+            </div>
             <Tabs defaultActiveKey='1'>
                 <TabPane tab='Details' key='1'>
                     <Row gutter={32}>
@@ -123,7 +134,7 @@ const PlayText = (props) => {
     
     return (
         <Row gutter={32}>
-            <Col span={8}>
+            <Col span={7}>
                 <h3>Play Navigation</h3>
                 <Select value={currentAct.name} onChange={handleActChange}>
                     { props.acts.map(a => (

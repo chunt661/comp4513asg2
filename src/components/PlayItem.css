@@ -16,7 +16,7 @@
     padding: 8px 16px;
 }
 
-.result .favourite-btn {
+/*.result .favourite-btn {
     border: none;
     background: none !important;
     box-shadow: none;
@@ -25,7 +25,7 @@
 
 .result .favourite-btn span {
     color: inherit;
-}
+}*/
 
 .result .title,
 .result .year {

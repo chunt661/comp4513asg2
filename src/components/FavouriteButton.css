@@ -1,0 +1,10 @@
+button.favourite-btn {
+    border: none;
+    background: none !important;
+    box-shadow: none;
+    margin-left: auto;
+}
+
+button.favourite-btn span {
+    color: inherit;
+}

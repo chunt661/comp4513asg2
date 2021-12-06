@@ -4,7 +4,6 @@ import { CaretUpFilled, CaretDownFilled } from '@ant-design/icons';
 
 import PlayItem from './PlayItem.js';
 import Filters from './Filters.js';
-import { FavouritesContext } from './FavouritesContext.js';
 
 import './Browse.css';
 
@@ -25,8 +24,6 @@ const Browse = (props) => {
     
     // Search query
     //const [query, setQuery] = useState(props.query); // Initial value is retrieved from props
-    
-    const { favourites, addToFavourites, removeFromFavourites } = useContext(FavouritesContext);
     
     /* Holds the last sort configuration. Used to ensure the data is still
     sorted after applying filters. */
@@ -139,16 +136,10 @@ const Browse = (props) => {
                     <li className='result'>No plays were found.</li>
                 )}
                 { plays.map(p => {
-                    const favourited = favourites.filter(f => f.id === p.id).length > 0;
-                    const updateFavourites = favourited ?
-                          removeFromFavourites
-                        : addToFavourites;
                     return (
                         <PlayItem
                             key={p.id}
-                            play={p}
-                            favourited={favourited}
-                            updateFavourites={updateFavourites} />
+                            play={p} />
                     );
                 })}
             </ul>
