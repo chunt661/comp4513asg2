@@ -7,6 +7,7 @@ const registerPlaysList = (app, Play) => {
     // Fields to be returned
     const projection = {
         id: 1,
+        filename: 1,
         title: 1,
         likelyDate: 1,
         genre: 1,
