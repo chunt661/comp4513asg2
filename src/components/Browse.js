@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useContext } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Layout } from 'antd';
 import { CaretUpFilled, CaretDownFilled } from '@ant-design/icons';
 
@@ -56,7 +56,7 @@ const Browse = (props) => {
         getData();
     }, []);
     
-    /*
+    /**
     Updates the stored sort configuration and then uses the new values to sort
     the plays.
     */
@@ -69,7 +69,7 @@ const Browse = (props) => {
         sortPlays(plays, field, direction);
     };
     
-    /*
+    /**
     Sorts a list of plays by the given criteria. The stored sort configuration
     is used by default.
     The sorted list is stored in state and is returned.
@@ -85,7 +85,7 @@ const Browse = (props) => {
         return sorted;
     };
     
-    /*
+    /**
     Filters the original dataset by the given criteria.
     The filtered list is stored in state and is returned.
     */
@@ -147,7 +147,7 @@ const Browse = (props) => {
     );
 };
 
-/*
+/**
 A button for a sortable field. When clicked, it updates the parent's sort
 configuration. An arrow displays the current sort direction.
 */
@@ -156,11 +156,15 @@ const SortButton = (props) => {
     // eslint-disable-next-line
     const isActive = props.sortConfig.field == props.field;
     
+    /**
+    Updates the sort direction when this button is clicked.
+    */
     const handleClick = () => {
         const direction = isActive ? props.sortConfig.direction*-1 : defaultDirection;
         props.updateSort(props.field, direction);
     };
     
+    // Helper variables for current sort direction
     const upActive = isActive && props.sortConfig.direction === -1;
     const downActive = isActive && props.sortConfig.direction === 1;
     

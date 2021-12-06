@@ -151,7 +151,7 @@ const Filters = (props) => {
 
 
 /*
-A checkbox + text field for entering year values.
+A checkbox and text field for entering year values.
 */
 const YearInput = (props) => {
     const [active, setActive] = useState(false);
@@ -173,6 +173,8 @@ const YearInput = (props) => {
     a props.onChange function, changing a state value in the parent, and then
     passing the value of that state back to the component as the current input
     value to display.
+    
+    AKA I was so lazy that I did more work
     */
     useEffect(() => {
         if (shouldClear) {

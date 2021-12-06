@@ -7,16 +7,14 @@ import './Nav.css';
 
 const { Header } = Layout;
 
+/**
+The top nav bar.
+*/
 const Nav = (props) => {
     const [aboutVisible, setAboutVisible] = useState(false);
     
-    const openModal = () => {
-        setAboutVisible(true);
-    };
-    
-    const closeModal = () => {
-        setAboutVisible(false);
-    }
+    const openModal = () => { setAboutVisible(true); };
+    const closeModal = () => { setAboutVisible(false); }
     
     return (
         <Header>

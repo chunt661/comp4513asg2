@@ -1,10 +1,13 @@
 import { Button } from 'antd';
-import { HeartFilled, HeartOutlined, BookFilled } from '@ant-design/icons';
+import { BookFilled } from '@ant-design/icons';
 
 import FavouriteButton from './FavouriteButton.js';
 
 import './PlayItem.css';
 
+/**
+An individual search result item.
+*/
 const PlayItem = (props) => {
     return (
         <li className='result'>

@@ -1,7 +1,5 @@
 import { useState, createContext } from 'react';
 
-export const FavouritesContext = createContext();
-
 const FavouritesContextProvider = (props) => {
     const [favourites, setFavourites] = useState([]);
     
@@ -31,4 +29,5 @@ const FavouritesContextProvider = (props) => {
     );
 };
 
+export const FavouritesContext = createContext();
 export default FavouritesContextProvider;
