@@ -14,6 +14,8 @@ const FavouriteButton = (props) => {
     // Icon is filled if the play is favourited, and hollow if it is not
     const Icon = favourited ? HeartFilled : HeartOutlined;
     
+    const ghost = props.isWhite ? !favourited : favourited;
+    
     /**
     Adds or removes the play from favourites.
     */
@@ -27,15 +29,16 @@ const FavouriteButton = (props) => {
     
     return (
         <Button
-            onClick={handleClick}
             className='favourite-btn'
+            title={favourited ? 'Remove from favourites' : 'Add to favourites'}
+            onClick={handleClick}
             type={favourited ? 'danger' : 'default' }
-            {...(favourited && {ghost: true})}
             shape='circle'
             icon={<Icon style={{
                         opacity: (favourited ? 1 : .66),
                         fontSize: (props.size == 'large' ? '20pt' : '14pt')
                     }} />}
+            {...(ghost && {ghost: true})}
             />
     )
 };
