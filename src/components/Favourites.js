@@ -1,4 +1,5 @@
 import { useState, useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { Layout, Badge, Button } from 'antd';
 import { HeartOutlined, LeftCircleOutlined,
         RightCircleOutlined, CloseOutlined } from '@ant-design/icons';
@@ -87,7 +88,7 @@ const FavouritesItem = (props) => {
     return (
         <div className='fav-container'>
         <li>
-            <span>{props.play.title}</span>
+            <Link to={'/play/' + props.play.id}>{props.play.title}</Link>
             <Button
                 onClick={handleDelete}
                 size="small"
