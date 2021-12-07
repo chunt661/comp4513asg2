@@ -18,16 +18,9 @@ const Filters = (props) => {
     const [yearAfter, setYearAfter] = useState('');
     const [genres, setGenres] = useState([]);
     
+    // References to the year inputs for clearing
     const yearARef = useRef(null);
     const yearBRef = useRef(null);
-    
-    /*
-    This is basically a flag that tells the components whether they should
-    clear their inputs. Essentially the opposite of a dirty flag.
-    
-    See the comment in the YearInput component below for more explanation.
-    */
-    const [shouldClear, setShouldClear] = useState(false);
     
     /**
     Applies the given filters to the search results. The filter values are the
@@ -43,21 +36,12 @@ const Filters = (props) => {
     };
     
     /**
-    Called whenever the user types into the search bar.
-    */
-    const handleQuery = (e) => {
-        setQuery(e.target.value);
-        setShouldClear(false);
-    };
-    
-    /**
     Updates the 'before year' state value. Called whenever relevant input is
     received. If the 'before' checkbox is unchecked, the state will be set to
     blank instead of what has been inputted.
     */
     const handleYearBefore = (checked, year) => {
         setYearBefore(checked ? year : '');
-        setShouldClear(false);
     };
     
     /**
@@ -67,15 +51,6 @@ const Filters = (props) => {
     */
     const handleYearAfter = (checked, year) => {
         setYearAfter(checked ? year : '');
-        setShouldClear(false);
-    };
-    
-    /**
-    Updates the genre state. Called whenever a new genre is selected.
-    */
-    const handleGenre = (v) => {
-        setGenres(v);
-        setShouldClear(false);
     };
     
     /**
@@ -92,7 +67,8 @@ const Filters = (props) => {
     };
     
     const handleApply = () => { applyFilters() };
-    
+    const handleQuery = (e) => { setQuery(e.target.value); };
+    const handleGenre = (v) => { setGenres(v); };
     const toggleCollapse = () => { setCollapsed(!collapsed) };
     
     const FilterIcon = collapsed ? FilterFilled : FilterOutlined;
@@ -121,12 +97,12 @@ const Filters = (props) => {
                     <YearInput
                         name='Before'
                         onChange={handleYearBefore}
-                        shouldClear={shouldClear}
+                        applyFilters={applyFilters}
                         ref={yearBRef} />
                     <YearInput
                         name='After'
                         onChange={handleYearAfter}
-                        shouldClear={shouldClear}
+                        applyFilters={applyFilters}
                         ref={yearARef} />
                 </fieldset>
                 <fieldset>
@@ -194,6 +170,13 @@ const YearInput = forwardRef((props, ref) => {
         props.onChange(checked, val);
     };
     
+    /**
+    Applies the filters when the enter key is pressed.
+    */
+    const handleSubmit = (e) => {
+        props.applyFilters();
+    }
+    
     return (
         <Input.Group className='year-input'>
             <Row>
@@ -210,7 +193,8 @@ const YearInput = forwardRef((props, ref) => {
                     <Input
                         size='small'
                         onChange={handleInput}
-                        value={year} />
+                        value={year}
+                        onPressEnter={handleSubmit} />
                 </Col>
             </Row>
         </Input.Group>
