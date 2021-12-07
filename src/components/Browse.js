@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { Layout } from 'antd';
+import { Layout, Divider } from 'antd';
 import { CaretUpFilled, CaretDownFilled } from '@ant-design/icons';
 
 import PlayItem from './PlayItem.js';
@@ -115,6 +115,7 @@ const Browse = (props) => {
         <Content id='browse'>
             <Filters
                 applyFilters={applyFilters} />
+            <Divider style={{margin: '.675rem 0'}} />
             <div className='results-header'>
                 <h2>Search Results</h2>
                     <div className='sort-container'>

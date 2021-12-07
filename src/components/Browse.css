@@ -16,6 +16,7 @@ ul.results {
     display: flex;
     overflow-y: auto;
     
+    padding-bottom: 1rem;
     padding-right: 1rem; /* For buffer between scrollbar */
 }
 
