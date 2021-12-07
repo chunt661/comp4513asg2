@@ -8,13 +8,15 @@ main#browse {
     overflow-y: auto;
 }
 
+#browse h2 {
+    margin-bottom: .5rem;
+}
+
 ul.results {
-    /*
-    Un-comment to make ONLY the results scroll
-    */
     display: flex;
     overflow-y: auto;
     
+    padding-right: 1rem; /* For buffer between scrollbar */
 }
 
 .results-header {
@@ -26,6 +28,7 @@ ul.results {
 .sort-container {
     display: flex;
     grid-gap: 1rem;
+    padding-right: 1rem; /* To better align with search results */
 }
 
 .sort-button {
