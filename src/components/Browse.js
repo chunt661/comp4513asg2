@@ -90,12 +90,11 @@ const Browse = (props) => {
     The filtered list is stored in state and is returned.
     */
     const applyFilters = (query, yearBefore, yearAfter, genres) => {
-        console.log(query);
         const filtered = [...playData.current]
                 // By title
                 .filter(p => p.title.toLowerCase().includes(query.toLowerCase()))
                 // By year
-                .filter(p => p.likelyDate < yearBefore && p.likelyDate > yearAfter)
+                .filter(p => parseInt(p.likelyDate) < yearBefore && parseInt(p.likelyDate) > yearAfter)
                 // By genres
                 .filter(p => genres.includes(p.genre) || genres.length === 0);
         const sorted = sortPlays(filtered);

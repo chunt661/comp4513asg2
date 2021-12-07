@@ -26,7 +26,18 @@ const Filters = (props) => {
     */
     const [shouldClear, setShouldClear] = useState(false);
     
-    const FilterIcon = collapsed ? FilterFilled : FilterOutlined;
+    /**
+    Applies the given filters to the search results. The filter values are the
+    appropriate state values by default, but can be modified if state is
+    unreliable (e.g. when setting state and then immediately applying
+    filters)
+    */
+    const applyFilters = (before=yearBefore, after=yearAfter, g=genres) => {
+        props.applyFilters(query,
+                           before !== '' ? before : 2000,
+                           after !== '' ? after : 0,
+                           g);
+    };
     
     /**
     Called whenever the user types into the search bar.
@@ -78,26 +89,11 @@ const Filters = (props) => {
         applyFilters('', '', []);
     };
     
-    /**
-    Applies filters using the current values. Called when the 'apply filters'
-    button is clicked.
-    */
     const handleApply = () => { applyFilters() };
+    
     const toggleCollapse = () => { setCollapsed(!collapsed) };
     
-    
-    /**
-    Applies the given filters to the search results. The filter values are the
-    appropriate state values by default, but can be modified if state is
-    unreliable (e.g. when setting state and then immediately applying
-    filters)
-    */
-    const applyFilters = (before=yearBefore, after=yearAfter, g=genres) => {
-        props.applyFilters(query,
-                           before !== '' ? before : 2000,
-                           after !== '' ? after : 0,
-                           g);
-    };
+    const FilterIcon = collapsed ? FilterFilled : FilterOutlined;
     
     return (
         <div>
