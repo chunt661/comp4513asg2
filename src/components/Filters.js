@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, forwardRef, useImperativeHandle } from 'react';
 import { Input, Checkbox, Select, Button, Row, Col } from 'antd';
 import { FilterFilled, FilterOutlined } from '@ant-design/icons';
 import { Collapse } from 'react-collapse';
@@ -17,6 +17,9 @@ const Filters = (props) => {
     const [yearBefore, setYearBefore] = useState('');
     const [yearAfter, setYearAfter] = useState('');
     const [genres, setGenres] = useState([]);
+    
+    const yearARef = useRef(null);
+    const yearBRef = useRef(null);
     
     /*
     This is basically a flag that tells the components whether they should
@@ -81,10 +84,9 @@ const Filters = (props) => {
     */
     const handleClear = () => {
         setQuery('');
-        setYearBefore('');
-        setYearAfter('');
         setGenres([]);
-        setShouldClear(true);
+        yearARef.current.clearInput();
+        yearBRef.current.clearInput();
         
         applyFilters('', '', []);
     };
@@ -119,11 +121,13 @@ const Filters = (props) => {
                     <YearInput
                         name='Before'
                         onChange={handleYearBefore}
-                        shouldClear={shouldClear} />
+                        shouldClear={shouldClear}
+                        ref={yearBRef} />
                     <YearInput
                         name='After'
                         onChange={handleYearAfter}
-                        shouldClear={shouldClear} />
+                        shouldClear={shouldClear}
+                        ref={yearARef} />
                 </fieldset>
                 <fieldset>
                     <legend>Genre</legend>
@@ -155,37 +159,17 @@ const Filters = (props) => {
 /**
 A checkbox and text field for entering year values.
 */
-const YearInput = (props) => {
+const YearInput = forwardRef((props, ref) => {
     const [active, setActive] = useState(false);
     const [year, setYear] = useState('');
     
-    // Destructured props as suggested by some warning related to useEffect
-    const shouldClear = props.shouldClear;
-    const onChange = props.onChange;
-    
-    /**
-    Pressing the 'clear filters' button sets shouldClear to true. Meanwhile,
-    useEffect is used to monitor the shouldClear variable. Whenever it is set
-    to true, the values are erased. When user input is detected, shouldClear is
-    set back to false.
-    
-    Clever (read: dumb) way to get around changing the year components' state
-    without passing the actual values back and forth. This allows the component
-    to retain 'ownership' of the input values rather than having input trigger
-    a props.onChange function, changing a state value in the parent, and then
-    passing the value of that state back to the component as the current input
-    value to display.
-    
-    AKA I was so lazy that I did more work
-    */
-    useEffect(() => {
-        if (shouldClear) {
+    useImperativeHandle(ref, () => ({
+        clearInput() {
             setYear('');
             setActive(false);
-            
-            onChange(false, '');
+            props.onChange(false, '');
         }
-    }, [shouldClear, onChange]);
+    }));
     
     /**
     Sets the checkbox status. Called whenever the checkbox is modified.
@@ -231,6 +215,6 @@ const YearInput = (props) => {
             </Row>
         </Input.Group>
     );
-}
+});
 
 export default Filters;
