@@ -1,45 +1,10 @@
-import { Modal, List, Divider, Row, Col } from 'antd';
+import { Modal, Button, List, Divider, Row, Col } from 'antd';
 
 import './About.css';
 
 const About = (props) => {
     const apiLinkPrefix = 'http://localhost:8081/api/';
     
-    /*const librariesReact = [
-        'react', 'antd', 'craco', 'craco-less',
-        'react-router-dom', 'react-transition-group',
-        'react-highlight-words', 'react-collapse'
-    ];*/
-    
-    const librariesReact = [
-        {
-            title: 'antd',
-            desc: 'Components from Ant Design.'
-        },
-        {
-            title: 'craco & craco-less',
-            desc: 'CRACO - Create React App Configuration Override (required for customizing Ant Design themes).'
-        },
-        {
-            title: 'react-router-dom',
-            desc: 'Adds routing to single-page React applications.'
-        },
-        {
-            title: 'react-transition-group (1.2.1)',
-            desc: 'Enables CSS transitions for React components.'
-        },
-        {
-            title: 'react-highlight-words',
-            desc: 'A simple library that highlights words in a text.'
-        },
-        {
-            title: 'react-collapse',
-            desc: 'A wrapper for creating collapsible React components.'
-        }
-    ];
-    /*'express', 'express-flash', 'express-session',
-        'mongoose', 'passport', 'passport-local',
-        'bcrypt', 'ejs', 'dotenv'*/
     const librariesNode = [
         {
             title: 'node.js',
@@ -75,17 +40,53 @@ const About = (props) => {
         }
     ];
     
+    const librariesReact = [
+        {
+            title: 'antd',
+            desc: 'Components from Ant Design.'
+        },
+        {
+            title: 'craco & craco-less',
+            desc: 'CRACO - Create React App Configuration Override (required for customizing Ant Design themes).'
+        },
+        {
+            title: 'react-router-dom',
+            desc: 'Adds routing to single-page React applications.'
+        },
+        {
+            title: 'react-transition-group (1.2.1)',
+            desc: 'Enables CSS transitions for React components.'
+        },
+        {
+            title: 'react-highlight-words',
+            desc: 'A simple library that highlights words in a text.'
+        },
+        {
+            title: 'react-collapse',
+            desc: 'A wrapper for creating collapsible React components.'
+        }
+    ];
+    
     return (
         <Modal
             className='about-modal'
-            title='COMP 4513 Assignment 2'
-            width={720}
+            title='COMP 4513 Assignment 2 - Fall 2021'
+            width={1024}
             visible={props.visible}
-            onOk={props.closeModal}>
+            onCancel={props.closeModal}
+            style={{ top: '20px' }}
+            footer={[
+                <Button key='submit'
+                    type='primary'
+                    onClick={props.closeModal}>
+                    OK
+                </Button>
+            ]}>
             <h1>shakespea.re: A Shakespeare play browser.</h1>
             <h2>by Chris Hunter</h2>
             <a href='https://github.com/chunt661/comp4513asg2'>GitHub repository</a>
             <Divider />
+            <p>shakespea.re is a Shakespeare play browser that contains basic information on most of William Shakespeare's work.</p>
             <p>The front-end was made with React, using components from Ant Design.</p>
             <p>This website interacts with a custom Node.js server that handles API requests and user authentication. The API was developed with Express and utilizes the Mongoose library to retrieve data from a MongoDB database. Session-based user authentication is performed with Passport.</p>
             <p>See below for a full list of libraries and packages used in this project.</p>

@@ -2,9 +2,8 @@
     margin-bottom: 0 !important;
 }
 
-.about-modal .list-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+.about-modal h3:last-of-type {
+    margin-bottom: 1rem;
 }
 
 .about-modal .link-container {
