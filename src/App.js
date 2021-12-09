@@ -42,7 +42,7 @@ const App = () => {
             <BrowserRouter>
                 <Route path='/' exact>
                     <Layout>
-                        <Nav />
+                        <Nav user={user} />
                         <Layout>
                             <Favourites visible={true} />
                             <Browse query='' />
@@ -51,7 +51,7 @@ const App = () => {
                 </Route>
                 <Route path='/play/:id'>
                     <Layout>
-                        <Nav />
+                        <Nav user={user} />
                         <Layout>
                             <Favourites visible={false} />
                             <Details />

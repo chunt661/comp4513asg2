@@ -24,7 +24,9 @@ const Nav = (props) => {
         <Menu>
             <Menu.Item key='1'>Account</Menu.Item>
             <Menu.Divider />
-            <Menu.Item key='2' danger>Logout</Menu.Item>
+            <Link to='/logout'>
+                <Menu.Item key='2' danger>Logout</Menu.Item>
+            </Link>
         </Menu>
     );
     
@@ -37,20 +39,21 @@ const Nav = (props) => {
             </Link>
             <div>
                 <Button type='text' onClick={openModal}>About</Button>
-                <Dropdown
-                    className='user-btn'
-                    overlay={userMenu}
-                    trigger={['click', 'hover']}
-                    placement='bottomCenter'>
-                    <Button
-                        id='user-btn'
-                        type='text'>
-                        <Avatar
-                            icon={<UserOutlined />}
-                            size={20} />
-                        <span>Firstname Lastname</span>
-                    </Button>
-                </Dropdown>
+                { props.user && (
+                    <Dropdown
+                        overlay={userMenu}
+                        trigger={['click', 'hover']}
+                        placement='bottomCenter'>
+                        <Button
+                            id='user-btn'
+                            type='text'>
+                            <Avatar
+                                src={props.user.picture.thumbnail}
+                                size={20} />
+                            <span>{props.user.details.firstname} {props.user.details.lastname}</span>
+                        </Button>
+                    </Dropdown>
+                ) }
             </div>
             <About visible={aboutVisible} closeModal={closeModal} />
         </Header>

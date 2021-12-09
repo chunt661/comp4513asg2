@@ -23,7 +23,7 @@ header > div {
     display: flex;
 }
 
-header .user-btn {
+header #user-btn {
     display: flex;
     align-items: center;
     grid-gap: 8px;
