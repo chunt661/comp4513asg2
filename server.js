@@ -44,7 +44,11 @@ require('./scripts/auth.js');
 
 /* React routes */
 
+app.use('/static', express.static(path.join(__dirname, 'build/static')));
+
 app.get('/', utils.ensureAuthenticated, (req, res) => {
+    console.log('authenticated?');
+    console.log(req.isAuthenticated());
     res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
@@ -83,7 +87,7 @@ app.get('/auth', (req, res) => {
 
 app.use((req, res, next) => { res.status(404).send('Bad request.') });
 
-const port = process.env.port;
+const port = process.env.api_port;
 app.listen(port, () => {
     console.log('listening on port ' + port);
 });
