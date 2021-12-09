@@ -50,10 +50,6 @@ app.get('/', utils.ensureAuthenticated, (req, res) => {
     res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
-app.get('/account', utils.ensureAuthenticated, (req, res) => {
-    res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
-
 /* API routing */
 
 router.registerPlaysList(app, Play);
