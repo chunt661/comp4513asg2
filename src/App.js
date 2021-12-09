@@ -5,6 +5,7 @@ import { Layout } from 'antd';
 import Nav from './components/Nav.js';
 import Browse from './components/Browse.js';
 import Details from './components/Details.js';
+import Account from './components/Account.js';
 import Favourites from './components/Favourites.js';
 import FavouritesContextProvider from './components/FavouritesContext.js';
 
@@ -55,6 +56,15 @@ const App = () => {
                         <Layout>
                             <Favourites visible={false} />
                             <Details />
+                        </Layout>
+                    </Layout>
+                </Route>
+                <Route path='/account'>
+                    <Layout>
+                        <Nav user={user} />
+                        <Layout>
+                            <Favourites visible={false} />
+                            <Account user={user} />
                         </Layout>
                     </Layout>
                 </Route>
