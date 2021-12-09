@@ -47,8 +47,6 @@ require('./scripts/auth.js');
 app.use('/static', express.static(path.join(__dirname, 'build/static')));
 
 app.get('/', utils.ensureAuthenticated, (req, res) => {
-    console.log('authenticated?');
-    console.log(req.isAuthenticated());
     res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
