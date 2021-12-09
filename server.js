@@ -74,6 +74,12 @@ app.get('/logout', (req, res) => {
     res.render('login', {message: req.flash('info')});
 });
 
+// Helper route to retrieve the ID of the currently logged-in user. This is to
+// allow user info to be fetched on the client side
+app.get('/auth', (req, res) => {
+    const id = req.user ? req.user.id : null;
+    res.json({ userID: id });
+});
 
 app.use((req, res, next) => { res.status(404).send('Bad request.') });
 
