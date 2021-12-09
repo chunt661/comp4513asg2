@@ -38,7 +38,7 @@ const Browse = (props) => {
             let data = JSON.parse(localStorage.getItem('plays'));
             if (!data) {
                 try {
-                    const url = 'http://localhost:8081/api/list';
+                    const url = '/api/list';
                     fetch(url)
                         .then(response => response.json())
                         .then(data => {

@@ -2,9 +2,7 @@ import { Modal, Button, List, Divider, Row, Col } from 'antd';
 
 import './About.css';
 
-const About = (props) => {
-    const apiLinkPrefix = 'http://localhost:8081/api/';
-    
+const About = (props) => {    
     const librariesNode = [
         {
             title: 'node.js',
@@ -92,9 +90,9 @@ const About = (props) => {
             <p>See below for a full list of libraries and packages used in this project.</p>
             <h3>API Links</h3>
             <div className='link-container'>
-                <a href={apiLinkPrefix + 'list/'}>Plays List</a>
-                <a href={apiLinkPrefix + 'play/alls_well_that_ends_well'}>Single Play</a>
-                <a href={apiLinkPrefix + 'user/1'}>User Details</a>
+                <a href={'/api/list'}>Plays List</a>
+                <a href={'/api/play/alls_well_that_ends_well'}>Single Play</a>
+                <a href={'/api/user/1'}>User Details</a>
             </div>
             <Divider />
             <h3>Technology</h3>

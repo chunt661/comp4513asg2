@@ -25,7 +25,7 @@ const Details = (props) => {
             let data = JSON.parse(localStorage.getItem(id));
             if (!data) {
                 try {
-                    const url = 'http://localhost:8081/api/play/' + id;
+                    const url = '/api/play/' + id;
                     fetch(url)
                         .then(response => response.json())
                         .then(data => {
