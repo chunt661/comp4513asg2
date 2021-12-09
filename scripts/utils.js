@@ -1,6 +1,4 @@
 function ensureAuthenticated(req, res, next) {
-    return next(); // temporary
-    
     if (req.isAuthenticated()) {
         return next();
     }
