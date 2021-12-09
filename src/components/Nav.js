@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Layout, Button } from 'antd';
+import { Layout, Button, Menu, Dropdown, Avatar } from 'antd';
+
+import { UserOutlined } from '@ant-design/icons';
 
 import About from './About.js';
 
@@ -17,6 +19,15 @@ const Nav = (props) => {
     const openModal = () => { setAboutVisible(true); };
     const closeModal = () => { setAboutVisible(false); }
     
+    // Account dropdown menu
+    const userMenu = (
+        <Menu>
+            <Menu.Item key='1'>Account</Menu.Item>
+            <Menu.Divider />
+            <Menu.Item key='2' danger>Logout</Menu.Item>
+        </Menu>
+    );
+    
     return (
         <Header>
             <Link
@@ -26,8 +37,20 @@ const Nav = (props) => {
             </Link>
             <div>
                 <Button type='text' onClick={openModal}>About</Button>
-                <Button type='text'>Account</Button>
-                <Button type='primary'>Log Out</Button>
+                <Dropdown
+                    className='user-btn'
+                    overlay={userMenu}
+                    trigger={['click', 'hover']}
+                    placement='bottomCenter'>
+                    <Button
+                        id='user-btn'
+                        type='text'>
+                        <Avatar
+                            icon={<UserOutlined />}
+                            size={20} />
+                        <span>Firstname Lastname</span>
+                    </Button>
+                </Dropdown>
             </div>
             <About visible={aboutVisible} closeModal={closeModal} />
         </Header>
