@@ -22,7 +22,9 @@ const Nav = (props) => {
     // Account dropdown menu
     const userMenu = (
         <Menu>
-            <Menu.Item key='1'>Account</Menu.Item>
+            <Link to='/account'>
+                <Menu.Item key='1'>Account</Menu.Item>
+            </Link>
             <Menu.Divider />
             <Link to='/logout'>
                 <Menu.Item key='2' danger>Logout</Menu.Item>
