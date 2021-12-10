@@ -30,6 +30,11 @@
     margin-bottom: 1rem;
 }
 
+.splash .button-container {
+    margin-top: 1rem;
+    text-align: center;
+}
+
 .hero-image {
     position: absolute;
     top: 0;

@@ -1,4 +1,5 @@
-import { Layout, Input } from 'antd';
+import { Link } from 'react-router-dom';
+import { Layout, Input, Button } from 'antd';
 
 import './Home.css';
 
@@ -15,10 +16,15 @@ const Home = (props) => {
                 <div>
                     <h1 className='logo'>shakespea.re</h1>
                     <p>A Shakespeare play browser. Close contenders for the name include "shakespearely" and "shakespr".</p>
-                    <p>Search for a specific play, or browse through his most famous works.</p>
+                    <p>Search for a specific play, or browse through all of his most famous works.</p>
                     <Input.Search
                         className='search'
                         placeholder='Search...' />
+                    <div className='button-container'>
+                        <Link to='/browse'>
+                            <Button size='large'>Browse All</Button>
+                        </Link>
+                    </div>
                 </div>
             </div>
         </Content>
