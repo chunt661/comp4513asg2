@@ -58,6 +58,8 @@ router.registerUserDetails(app, User);
 
 /* Login routing */
 
+app.use('/ejs', express.static(path.join(__dirname, 'views'))); // Temporary
+
 app.get('/login', (req, res) => {
     res.render('login.ejs', {message: req.flash('error')});
 });
