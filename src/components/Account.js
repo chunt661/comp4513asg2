@@ -19,10 +19,14 @@ const Account = (props) => {
             dateParts[0],
             dateParts[1]-1, // month is 0-indexed
             dateParts[2]);
+        
+        const day = parseInt(dateParts[2]); // Remove leading zeroes from the day
         const month = date.toLocaleString('default', { month: 'long'});
         
-        return `${month} ${dateParts[2]}, ${dateParts[0]}`;
+        return `${month} ${day}, ${dateParts[0]}`;
     };
+    
+    console.log(props.user);
     
     return (
         <Content id='account'>
@@ -59,7 +63,7 @@ const Account = (props) => {
                             { convertDate(props.user.membership.date_joined) }
                         </Descriptions.Item>
                         <Descriptions.Item label='Last update'>
-                            { convertDate(props.user.membership.last_update) }
+                            { convertDate(props.user.membership['last-update']) }
                         </Descriptions.Item>
                     </Descriptions>
                 </Col>
