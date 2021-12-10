@@ -9,6 +9,7 @@ import Details from './components/Details.js';
 import Account from './components/Account.js';
 import Favourites from './components/Favourites.js';
 import FavouritesContextProvider from './components/FavouritesContext.js';
+import SearchContextProvider from './components/SearchContext.js';
 
 import './App.less';
 
@@ -40,42 +41,44 @@ const App = () => {
     }, []);
     
     return (
-        <FavouritesContextProvider>
-            <BrowserRouter>
-                <Route path='/' exact>
-                    <Layout>
-                        <Home />
-                    </Layout>
-                </Route>
-                <Route path='/browse' exact>
-                    <Layout>
-                        <Nav user={user} />
+        <SearchContextProvider>
+            <FavouritesContextProvider>
+                <BrowserRouter>
+                    <Route path='/' exact>
                         <Layout>
-                            <Favourites visible={true} />
-                            <Browse query='' />
+                            <Home />
                         </Layout>
-                    </Layout>
-                </Route>
-                <Route path='/play/:id'>
-                    <Layout>
-                        <Nav user={user} />
+                    </Route>
+                    <Route path='/browse' exact>
                         <Layout>
-                            <Favourites visible={false} />
-                            <Details />
+                            <Nav user={user} />
+                            <Layout>
+                                <Favourites visible={true} />
+                                <Browse query='' />
+                            </Layout>
                         </Layout>
-                    </Layout>
-                </Route>
-                <Route path='/account'>
-                    <Layout>
-                        <Nav user={user} />
+                    </Route>
+                    <Route path='/play/:id'>
                         <Layout>
-                            <Favourites visible={false} />
-                            <Account user={user} />
+                            <Nav user={user} />
+                            <Layout>
+                                <Favourites visible={false} />
+                                <Details />
+                            </Layout>
                         </Layout>
-                    </Layout>
-                </Route>
-            </BrowserRouter>
-        </FavouritesContextProvider>
+                    </Route>
+                    <Route path='/account'>
+                        <Layout>
+                            <Nav user={user} />
+                            <Layout>
+                                <Favourites visible={false} />
+                                <Account user={user} />
+                            </Layout>
+                        </Layout>
+                    </Route>
+                </BrowserRouter>
+            </FavouritesContextProvider>
+        </SearchContextProvider>
     );
 }
 

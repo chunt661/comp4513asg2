@@ -1,12 +1,23 @@
-import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import { CSSTransitionGroup } from 'react-transition-group';
 import { Layout, Input, Button } from 'antd';
+
+import { SearchContext } from './SearchContext.js';
 
 import './Home.css';
 
 const { Content } = Layout;
 
 const Home = (props) => {
+    const { setQuery } = useContext(SearchContext);
+    const history = useHistory();
+    
+    const handleSearch = (value) => {
+        setQuery(value);
+        history.push('/browse');
+    };
+    
     return (
         <Content id='home'>
             <div
@@ -24,6 +35,7 @@ const Home = (props) => {
                     <Input.Search
                         className='search'
                         placeholder='Search...'
+                        onSearch={handleSearch}
                         enterButton />
                     <div className='button-container'>
                         <Link to='/browse'>
