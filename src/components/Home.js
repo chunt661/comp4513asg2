@@ -10,7 +10,7 @@ const Home = (props) => {
         <Content id='home'>
             <div
                 className='hero-image'
-                style={{backgroundImage: "url('/shakespeare.jpg')"}}>
+                style={{backgroundImage: "url('/hero.jpg')"}}>
             </div>
             <div className='splash'>
                 <div>
@@ -19,10 +19,11 @@ const Home = (props) => {
                     <p>Search for a specific play, or browse through all of his most famous works.</p>
                     <Input.Search
                         className='search'
-                        placeholder='Search...' />
+                        placeholder='Search...'
+                        enterButton />
                     <div className='button-container'>
                         <Link to='/browse'>
-                            <Button size='large'>Browse All</Button>
+                            <Button type='primary' size='large'>Browse All</Button>
                         </Link>
                     </div>
                 </div>
