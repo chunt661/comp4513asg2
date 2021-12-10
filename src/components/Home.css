@@ -1,0 +1,56 @@
+.splash {
+    position: absolute;
+    z-index: 1;
+    
+    display: flex;
+    align-items: center;
+    
+    width: 100%;
+    height: 100vh;
+    background: var(--primary-color);
+    background: linear-gradient(
+        90deg,
+        rgba(114, 46, 209, 1) max(550px, 50%),
+        rgba(211, 211, 211, 0.25));
+    
+    padding: 1rem 5rem;
+    
+    color: white;
+    font-size: 1rem;
+}
+
+.splash > div {
+    width: 450px;
+    line-height: 1;
+}
+
+.splash .logo {
+    color: inherit;
+    font-size: 4.5em;
+    margin-bottom: 1rem;
+}
+
+.hero-image {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 0;
+    
+    width: 66%;
+    height: 100vh;
+    
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* Special homepage searchbar styling */
+
+main#home .splash input {
+    border-right: none;
+}
+
+main#home .splash .ant-input-group-addon button {
+    border-left: none;
+    color: var(--primary-color);
+}

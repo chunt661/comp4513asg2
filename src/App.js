@@ -3,6 +3,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import { Layout } from 'antd';
 
 import Nav from './components/Nav.js';
+import Home from './components/Home.js';
 import Browse from './components/Browse.js';
 import Details from './components/Details.js';
 import Account from './components/Account.js';
@@ -42,6 +43,11 @@ const App = () => {
         <FavouritesContextProvider>
             <BrowserRouter>
                 <Route path='/' exact>
+                    <Layout>
+                        <Home />
+                    </Layout>
+                </Route>
+                <Route path='/browse' exact>
                     <Layout>
                         <Nav user={user} />
                         <Layout>
