@@ -8,10 +8,23 @@ header {
 
 header .logo {
     font-size: 16pt;
-    font-weight: 400;
     
     color: var(--text-color);
     background: none !important;
     
     padding: 0;
+}
+
+header button {
+    font-weight: 400 !important;
+}
+
+header > div {
+    display: flex;
+}
+
+header #user-btn {
+    display: flex;
+    align-items: center;
+    grid-gap: 8px;
 }

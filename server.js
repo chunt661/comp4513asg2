@@ -44,6 +44,8 @@ require('./scripts/auth.js');
 
 /* React routes */
 
+app.use('/static', express.static(path.join(__dirname, 'build/static')));
+
 app.get('/', utils.ensureAuthenticated, (req, res) => {
     res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
@@ -55,6 +57,8 @@ router.registerPlayDetails(app, Play);
 router.registerUserDetails(app, User);
 
 /* Login routing */
+
+app.use('/ejs', express.static(path.join(__dirname, 'views'))); // Temporary
 
 app.get('/login', (req, res) => {
     res.render('login.ejs', {message: req.flash('error')});
@@ -74,10 +78,16 @@ app.get('/logout', (req, res) => {
     res.render('login', {message: req.flash('info')});
 });
 
+// Helper route to retrieve the ID of the currently logged-in user. This is to
+// allow user info to be fetched on the client side
+app.get('/auth', (req, res) => {
+    const id = req.user ? req.user.id : null;
+    res.json({ userID: id });
+});
 
 app.use((req, res, next) => { res.status(404).send('Bad request.') });
 
-const port = process.env.port;
+const port = process.env.api_port;
 app.listen(port, () => {
     console.log('listening on port ' + port);
 });
