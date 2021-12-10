@@ -76,7 +76,12 @@ const Account = (props) => {
                 </Col>
             </Row>
             <Divider />
-            <Button type='primary' onClick={handleLogout}>Logout</Button>
+            <Button
+                id='logout-btn'
+                type='primary'
+                onClick={handleLogout}>
+                Logout
+            </Button>
         </Content>
     )
 };

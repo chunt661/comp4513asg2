@@ -13,7 +13,3 @@ main#account .title-container * {
     width: 50%;
     margin: auto;
 }
-
-#logout-btn button {
-    width: 100%;
-}
