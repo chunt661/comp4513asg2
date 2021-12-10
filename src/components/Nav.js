@@ -19,6 +19,13 @@ const Nav = (props) => {
     const openModal = () => { setAboutVisible(true); };
     const closeModal = () => { setAboutVisible(false); }
     
+    /**
+    Redirects the user to the logout page. Note that the logout button
+    redirects to /logout rather than utilizing react-router-dom for the
+    routing. This is because react-router-dom 'bypasses' Express' routing.
+    */
+    const handleLogout = () => { window.location.href = '/logout' };
+    
     // Account dropdown menu
     const userMenu = (
         <Menu>
@@ -26,9 +33,7 @@ const Nav = (props) => {
                 <Menu.Item key='1'>Account</Menu.Item>
             </Link>
             <Menu.Divider />
-            <Link to='/logout'>
-                <Menu.Item key='2' danger>Logout</Menu.Item>
-            </Link>
+            <Menu.Item key='2' onClick={handleLogout} danger>Logout</Menu.Item>
         </Menu>
     );
     

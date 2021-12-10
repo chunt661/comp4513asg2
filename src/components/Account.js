@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { Layout, Avatar, Space, Button, Typography, Divider, Descriptions, Row, Col } from 'antd';
 import { LikeFilled } from '@ant-design/icons';
 
@@ -8,6 +8,8 @@ const { Content } = Layout;
 const { Title } = Typography;
 
 const Account = (props) => {
+    const history = useHistory();
+    
     /**
     Converts a date to something that is human readable. JavaScript doesn't
     have very robust support for this for some reason, so I have to write this
@@ -26,7 +28,12 @@ const Account = (props) => {
         return `${month} ${day}, ${dateParts[0]}`;
     };
     
-    console.log(props.user);
+    /**
+    Redirects the user to the logout page. Note that the logout button
+    redirects to /logout rather than utilizing react-router-dom for the
+    routing. This is because react-router-dom 'bypasses' Express' routing.
+    */
+    const handleLogout = () => { window.location.href = '/logout' };
     
     return (
         <Content id='account'>
@@ -69,9 +76,7 @@ const Account = (props) => {
                 </Col>
             </Row>
             <Divider />
-            <Link id='logout-btn' to='/logout'>
-                <Button type='primary'>Logout</Button>
-            </Link>
+            <Button type='primary' onClick={handleLogout}>Logout</Button>
         </Content>
     )
 };
