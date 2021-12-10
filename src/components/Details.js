@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, withRouter } from 'react-router-dom';
-import { Layout, Tabs, Row, Col, List, Button } from 'antd';
-import { CloseCircleFilled } from '@ant-design/icons';
+import { Layout, Tabs, Row, Col, List, Button, Popover } from 'antd';
+import { CloseCircleFilled, InfoCircleOutlined } from '@ant-design/icons';
 
 import FavouriteButton from './FavouriteButton.js';
 import PlayViewer from './PlayViewer.js';
@@ -25,7 +25,7 @@ const Details = (props) => {
             let data = JSON.parse(localStorage.getItem(id));
             if (!data) {
                 try {
-                    const url = 'http://localhost:8081/api/play/' + id;
+                    const url = '/api/play/' + id;
                     fetch(url)
                         .then(response => response.json())
                         .then(data => {
@@ -42,6 +42,12 @@ const Details = (props) => {
         
         getData();
     }, [id]);
+    
+    const yearInfo = (
+        <div>
+            The likely year that this play was produced.
+        </div>
+    );
     
     return (
         <Content id='details'>
@@ -70,7 +76,11 @@ const Details = (props) => {
                             <Col span={6}>
                                 <h3>Details</h3>
                                 <dl>
-                                    <dt>Year</dt>
+                                    <dt>
+                                        Year&nbsp;<Popover content={yearInfo}>
+                                            <InfoCircleOutlined  style={{ fontSize: '9pt' }} />
+                                        </Popover>
+                                    </dt>
                                     <dd>{play.likelyDate}</dd>
                                     <dt>Genre</dt>
                                     <dd>{play.genre}</dd>

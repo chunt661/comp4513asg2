@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-      <meta charset="utf-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="/ejs/login.css" />
     </head>
     <body>
         <div>
@@ -16,11 +17,9 @@
                     <label>Password</label>
                     <input type="password" name="password" />
                 </fieldset>
-                <div>
-                    <button type="submit">Login</button>
-                </div>
+                <button type="submit">Login</button>
                 <% if (message) { %>
-                    <p><%= message %></p>
+                <p><%= message %></p>
                 <% } %>
             </form>
         </div>

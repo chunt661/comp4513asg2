@@ -1,0 +1,70 @@
+.splash {
+    position: absolute;
+    z-index: 1;
+    
+    display: flex;
+    align-items: center;
+    
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, .9) max(550px, 50%),
+        rgba(255, 255, 255, 0.25));
+    
+    font-size: 1rem;
+}
+
+.splash > span {
+    width: 500px;
+    line-height: 1;
+    padding-left: 80px;
+}
+
+.splash .logo {
+    font-size: 4.5em;
+    margin-bottom: 1rem;
+}
+
+.splash .button-container {
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.hero-image {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 0;
+    
+    width: 100vw;
+    height: 100vh;
+    
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#hero-image-credit {
+    position: absolute;
+    bottom: var(--padding-md);
+    right: var(--padding-lg);
+    z-index: 1;
+    
+    color: var(--text-color);
+}
+
+/* Splash transition */
+/*
+Opening transition
+*/
+.splash-appear {
+    opacity: 0.01;
+    transform: translateX(-10%);
+}
+
+.splash-appear.splash-appear-active {
+    opacity: 1;
+    transform: translateX(0%);
+    transition: opacity 800ms ease, transform 800ms ease;
+}

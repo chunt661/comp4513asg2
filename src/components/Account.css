@@ -1,0 +1,15 @@
+main#account .title-container {
+    width: 100%;
+    justify-content: center;
+}
+
+main#account .title-container * {
+    color: white !important;
+    margin-bottom: 0;
+}
+
+#logout-btn {
+    display: block;
+    width: 50%;
+    margin: auto;
+}
