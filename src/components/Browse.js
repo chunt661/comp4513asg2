@@ -4,6 +4,7 @@ import { CaretUpFilled, CaretDownFilled } from '@ant-design/icons';
 
 import PlayItem from './PlayItem.js';
 import Filters from './Filters.js';
+import LoadingSpinner from './LoadingSpinner.js';
 import { SearchContext } from './SearchContext.js';
 
 import './Browse.css';
@@ -25,8 +26,10 @@ const Browse = (props) => {
     // Filtered + sorted dataset
     const [plays, setPlays] = useState([]);
     
-    /* Holds the last sort configuration. Used to ensure the data is still
-    sorted after applying filters. */
+    const [loading, setLoading] = useState(true);
+    
+    // Holds the last sort configuration. Used to ensure the data is still
+    // sorted after applying filters.
     const [sortConfig, setSortConfig] = useState({
         field: 'title',
         direction: defaultSortDirection
@@ -45,14 +48,17 @@ const Browse = (props) => {
                             playData.current = sortPlays(data); // plays is also set when sorted
                             localStorage.setItem('plays', JSON.stringify(playData.current));
                             applyFilters(query, 2000, 0, []);
+                            setLoading(false);
                         });
                 } catch (err) {
                     console.error(err);
+                    setLoading(false);
                 }
             } else {
                 playData.current = data;
                 setPlays(data);
                 applyFilters(query, 2000, 0, []);
+                setLoading(false);
             }
         };
         getData();
@@ -133,6 +139,8 @@ const Browse = (props) => {
                             sortConfig={sortConfig} />
                     </div>
             </div>
+            { loading ? <LoadingSpinner /> // Display spinner if loading
+            : // Display search results if data is loaded
             <ul className='results'>
                 { plays.length === 0 && (
                     <li className='result'>No plays were found.</li>
@@ -145,6 +153,7 @@ const Browse = (props) => {
                     );
                 })}
             </ul>
+            }
         </Content>
     );
 };

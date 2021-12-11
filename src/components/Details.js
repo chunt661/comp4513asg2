@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useParams, withRouter } from 'react-router-dom';
-import { Layout, Tabs, Row, Col, List, Button, Popover } from 'antd';
+import { Layout, Tabs, Row, Col, List, Button, Popover, Skeleton } from 'antd';
 import { CloseCircleFilled, InfoCircleOutlined } from '@ant-design/icons';
 
 import FavouriteButton from './FavouriteButton.js';
 import PlayViewer from './PlayViewer.js';
+import LoadingSpinner from './LoadingSpinner.js';
 
 import './Details.css';
 
@@ -17,6 +18,7 @@ parameters, then loaded from either the API or local storage.
 */
 const Details = (props) => {
     const [ play, setPlay ] = useState([]);
+    const [ loading, setLoading ] = useState(true);
     const { id } = useParams(); // URL parameter
     
     // Load play data
@@ -31,12 +33,15 @@ const Details = (props) => {
                         .then(data => {
                             setPlay(data[0]);
                             localStorage.setItem(id, JSON.stringify(data[0]))
+                            setLoading(false);
                         });
                 } catch (err) {
                     console.error(err);
+                    setLoading(false);
                 }
             } else {
                 setPlay(data);
+                setLoading(false);
             }
         };
         
@@ -51,6 +56,8 @@ const Details = (props) => {
     
     return (
         <Content id='details'>
+            { !loading
+            ? // Content when data is loaded
             <div className='title-container'>
                 <div>
                     <span>
@@ -65,9 +72,16 @@ const Details = (props) => {
                 </div>
                 <p>{play.synopsis}</p>
             </div>
+            : // Content if currently loading
+            <div className='title-container'>
+                <Skeleton active />
+            </div>
+            }
             <div className='content'>
                 <Tabs type='card' defaultActiveKey='1'>
                     <TabPane tab='Details' key='1'>
+                        { !loading
+                        ? // Content when data is loaded
                         <Row gutter={32}>
                             <Col span={18}>
                                 <h3>Description</h3>
@@ -93,6 +107,9 @@ const Details = (props) => {
                                 </ul>
                             </Col>
                         </Row>
+                        : // Content if currently loading
+                        <Skeleton active />
+                        }
                     </TabPane>
                     <TabPane
                         tab='Characters'
