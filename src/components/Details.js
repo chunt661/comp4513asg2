@@ -74,7 +74,14 @@ const Details = (props) => {
             </div>
             : // Content if currently loading
             <div className='title-container'>
-                <Skeleton active />
+                <div>
+                    <Skeleton active />
+                    <Button
+                        shape='circle'
+                        icon={<CloseCircleFilled style={{ fontSize: '20pt' }} />}
+                        onClick={() => { props.history.goBack() }}
+                        ghost />
+                </div>
             </div>
             }
             <div className='content'>

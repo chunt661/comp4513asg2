@@ -30,6 +30,7 @@ main#details {
 .title-container button {
     border: none;
     box-shadow: none;
+    align-self: flex-start;
 }
 
 #details .ant-tabs-nav {
