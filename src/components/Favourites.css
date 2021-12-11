@@ -44,7 +44,8 @@ aside.favourites > div {
 
 .favourites li.empty {
     border: none;
-    color: var(--text-color);
+    color: var(--text-color-secondary);
+    font-weight: 400;
     text-align: center;
 }
 
@@ -114,7 +115,7 @@ Added & deleted items transition
 }
 
 .empty-slide-enter {
-    transform: translateX(-50%);
+    transform: translateX(-100%);
     position: absolute;
 }
 
