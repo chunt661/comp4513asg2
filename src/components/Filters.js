@@ -1,7 +1,10 @@
-import { useState, useEffect, useRef, forwardRef, useImperativeHandle } from 'react';
+import { useState, useRef, useContext,
+        forwardRef, useImperativeHandle } from 'react';
 import { Input, Checkbox, Select, Button, Row, Col } from 'antd';
 import { FilterFilled, FilterOutlined } from '@ant-design/icons';
 import { Collapse } from 'react-collapse';
+
+import { SearchContext } from './SearchContext.js';
 
 import './Filters.css';
 
@@ -11,11 +14,14 @@ const { Option } = Select;
 Filter panel. Holds the search filter options and buttons.
 */
 const Filters = (props) => {
+    const { setQuery, filters, clearFilters } = useContext(SearchContext);
+    
     const [collapsed, setCollapsed] = useState(false);
     
-    const [query, setQuery] = useState(''); // Initial value is retrieved from props
-    const [yearBefore, setYearBefore] = useState('');
-    const [yearAfter, setYearAfter] = useState('');
+    // Initial value is retrieved from props
+    const [query, setQueryText] = useState(props.defaultQuery);
+    const [yearBefore, setYearBefore] = useState(props.defaultFilters.yearBefore);
+    const [yearAfter, setYearAfter] = useState(props.defaultFilters.yearAfter);
     const [genres, setGenres] = useState([]);
     
     // References to the year inputs for clearing
@@ -29,10 +35,10 @@ const Filters = (props) => {
     filters)
     */
     const applyFilters = (before=yearBefore, after=yearAfter, g=genres) => {
-        props.applyFilters(query,
-                           before !== '' ? before : 2000,
-                           after !== '' ? after : 0,
-                           g);
+        setQuery(query);
+        filters.setYearBefore(before);
+        filters.setYearAfter(after);
+        filters.setGenres(genres);
     };
     
     /**
@@ -58,16 +64,16 @@ const Filters = (props) => {
     'clear filters' button is clicked
     */
     const handleClear = () => {
-        setQuery('');
+        setQueryText('');
         setGenres([]);
         yearARef.current.clearInput();
         yearBRef.current.clearInput();
         
-        applyFilters('', '', []);
+        clearFilters();
     };
     
     const handleApply = () => { applyFilters() };
-    const handleQuery = (e) => { setQuery(e.target.value); };
+    const handleSearchInput = (e) => { setQueryText(e.target.value); };
     const handleGenre = (v) => { setGenres(v); };
     const toggleCollapse = () => { setCollapsed(!collapsed) };
     
@@ -81,7 +87,7 @@ const Filters = (props) => {
                     placeholder='Search...'
                     value={query}
                     enterButton
-                    onChange={handleQuery}
+                    onChange={handleSearchInput}
                     onSearch={handleApply} />
                 <Button
                     className='toggle-btn'
@@ -98,11 +104,13 @@ const Filters = (props) => {
                         name='Before'
                         onChange={handleYearBefore}
                         applyFilters={applyFilters}
+                        value={yearBefore}
                         ref={yearBRef} />
                     <YearInput
                         name='After'
                         onChange={handleYearAfter}
                         applyFilters={applyFilters}
+                        value={yearAfter}
                         ref={yearARef} />
                 </fieldset>
                 <fieldset>
@@ -136,8 +144,9 @@ const Filters = (props) => {
 A checkbox and text field for entering year values.
 */
 const YearInput = forwardRef((props, ref) => {
-    const [active, setActive] = useState(false);
-    const [year, setYear] = useState('');
+    // Initial value determined by props
+    const [active, setActive] = useState(props.value != '');
+    const [year, setYear] = useState(props.value);
     
     useImperativeHandle(ref, () => ({
         clearInput() {
