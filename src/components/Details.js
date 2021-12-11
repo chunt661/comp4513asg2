@@ -2,10 +2,10 @@ import { useState, useEffect } from 'react';
 import { useParams, withRouter } from 'react-router-dom';
 import { Layout, Tabs, Row, Col, List, Button, Popover, Skeleton } from 'antd';
 import { CloseCircleFilled, InfoCircleOutlined } from '@ant-design/icons';
+import { Collapse } from 'react-collapse';
 
 import FavouriteButton from './FavouriteButton.js';
 import PlayViewer from './PlayViewer.js';
-import LoadingSpinner from './LoadingSpinner.js';
 
 import './Details.css';
 
@@ -19,6 +19,7 @@ parameters, then loaded from either the API or local storage.
 const Details = (props) => {
     const [ play, setPlay ] = useState([]);
     const [ loading, setLoading ] = useState(true);
+    const [ currentTab, setCurrentTab ] = useState('details');
     const { id } = useParams(); // URL parameter
     
     // Load play data
@@ -70,7 +71,9 @@ const Details = (props) => {
                         onClick={() => { props.history.goBack() }}
                         ghost />
                 </div>
-                <p>{play.synopsis}</p>
+                <Collapse isOpened={currentTab !== 'play-text'}>
+                    <p>{play.synopsis}</p>
+                </Collapse>
             </div>
             : // Content if currently loading
             <div className='title-container'>
@@ -85,8 +88,11 @@ const Details = (props) => {
             </div>
             }
             <div className='content'>
-                <Tabs type='card' defaultActiveKey='1'>
-                    <TabPane tab='Details' key='1'>
+                <Tabs
+                    type='card'
+                    defaultActiveKey='details'
+                    onChange={setCurrentTab}>
+                    <TabPane tab='Details' key='details'>
                         { !loading
                         ? // Content when data is loaded
                         <Row gutter={32}>
@@ -120,7 +126,7 @@ const Details = (props) => {
                     </TabPane>
                     <TabPane
                         tab='Characters'
-                        key='2'
+                        key='characters'
                         className='characters-tab'
                         {...(!play.filename && {disabled: true})}>
                         {
@@ -140,7 +146,7 @@ const Details = (props) => {
                     </TabPane>
                     <TabPane
                         tab='Text'
-                        key='3'
+                        key='play-text'
                         {...(!play.filename && {disabled: true})}>
                         { play.playText && <PlayViewer title={play.playText.title} acts={play.playText.acts} /> }
                     </TabPane>
