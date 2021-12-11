@@ -1,9 +1,10 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useContext } from 'react';
 import { Layout, Divider } from 'antd';
 import { CaretUpFilled, CaretDownFilled } from '@ant-design/icons';
 
 import PlayItem from './PlayItem.js';
 import Filters from './Filters.js';
+import { SearchContext } from './SearchContext.js';
 
 import './Browse.css';
 
@@ -16,14 +17,13 @@ const defaultSortDirection = -1;
 Search results view.
 */
 const Browse = (props) => {
+    const { query, filters } = useContext(SearchContext);
+    
     // Original dataset
     const playData = useRef([]);
     
     // Filtered + sorted dataset
     const [plays, setPlays] = useState([]);
-    
-    // Search query
-    //const [query, setQuery] = useState(props.query); // Initial value is retrieved from props
     
     /* Holds the last sort configuration. Used to ensure the data is still
     sorted after applying filters. */
@@ -44,6 +44,7 @@ const Browse = (props) => {
                         .then(data => {
                             playData.current = sortPlays(data); // plays is also set when sorted
                             localStorage.setItem('plays', JSON.stringify(playData.current));
+                            applyFilters(query, 2000, 0, []);
                         });
                 } catch (err) {
                     console.error(err);
@@ -51,6 +52,7 @@ const Browse = (props) => {
             } else {
                 playData.current = data;
                 setPlays(data);
+                applyFilters(query, 2000, 0, []);
             }
         };
         getData();
@@ -86,13 +88,13 @@ const Browse = (props) => {
     };
     
     /**
-    Filters the original dataset by the given criteria.
-    The filtered list is stored in state and is returned.
+    Filters the original dataset by the given criteria. The filtered list is
+    also stored in state.
     */
-    const applyFilters = (query, yearBefore, yearAfter, genres) => {
+    const applyFilters = (q, yearBefore, yearAfter, genres) => {
         const filtered = [...playData.current]
                 // By title
-                .filter(p => p.title.toLowerCase().includes(query.toLowerCase()))
+                .filter(p => p.title.toLowerCase().includes(q.toLowerCase()))
                 // By year
                 .filter(p => parseInt(p.likelyDate) < yearBefore && parseInt(p.likelyDate) > yearAfter)
                 // By genres
@@ -101,19 +103,19 @@ const Browse = (props) => {
         setPlays(sorted);
     };
     
-    /*const searchHeader = (
-        <Input.Search
-            className='search'
-            placeholder='Search...'
-            enterButton
-            onClick={(e) => e.stopPropagation}
-            onChange={handleQuery}
-            onSearch={applyFilters} />
-    );*/
+    // Applies filter whenever filter values change.
+    useEffect(() => {
+        applyFilters(query,
+                       filters.yearBefore !== '' ? filters.yearBefore : 2000,
+                       filters.yearAfter !== '' ? filters.yearAfter : 0,
+                       filters.genres);
+    }, [query, filters]);
+    
     return (
         <Content id='browse'>
             <Filters
-                applyFilters={applyFilters} />
+                defaultQuery={query}
+                defaultFilters={filters} />
             <Divider style={{margin: '.675rem 0'}} />
             <div className='results-header'>
                 <h2>Search Results</h2>
@@ -153,7 +155,6 @@ configuration. An arrow displays the current sort direction.
 */
 const SortButton = (props) => {
     const defaultDirection = defaultSortDirection;
-    // eslint-disable-next-line
     const isActive = props.sortConfig.field == props.field;
     
     /**

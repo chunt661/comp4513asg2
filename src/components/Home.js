@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { CSSTransitionGroup } from 'react-transition-group';
 import { Layout, Input, Button } from 'antd';
@@ -10,8 +10,11 @@ import './Home.css';
 const { Content } = Layout;
 
 const Home = (props) => {
-    const { setQuery } = useContext(SearchContext);
+    const { setQuery, clearFilters } = useContext(SearchContext);
     const history = useHistory();
+    
+    // Clears the filters whenever the user navigates to the homepage
+    useEffect(() => { clearFilters() }, []);
     
     const handleSearch = (value) => {
         setQuery(value);

@@ -1,7 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState, useRef, useContext,
+        forwardRef, useImperativeHandle } from 'react';
 import { Input, Checkbox, Select, Button, Row, Col } from 'antd';
 import { FilterFilled, FilterOutlined } from '@ant-design/icons';
 import { Collapse } from 'react-collapse';
+
+import { SearchContext } from './SearchContext.js';
 
 import './Filters.css';
 
@@ -11,20 +14,19 @@ const { Option } = Select;
 Filter panel. Holds the search filter options and buttons.
 */
 const Filters = (props) => {
+    const { setQuery, filters, clearFilters } = useContext(SearchContext);
+    
     const [collapsed, setCollapsed] = useState(false);
     
-    const [query, setQuery] = useState(''); // Initial value is retrieved from props
-    const [yearBefore, setYearBefore] = useState('');
-    const [yearAfter, setYearAfter] = useState('');
+    // Initial value is retrieved from props
+    const [query, setQueryText] = useState(props.defaultQuery);
+    const [yearBefore, setYearBefore] = useState(props.defaultFilters.yearBefore);
+    const [yearAfter, setYearAfter] = useState(props.defaultFilters.yearAfter);
     const [genres, setGenres] = useState([]);
     
-    /*
-    This is basically a flag that tells the components whether they should
-    clear their inputs. Essentially the opposite of a dirty flag.
-    
-    See the comment in the YearInput component below for more explanation.
-    */
-    const [shouldClear, setShouldClear] = useState(false);
+    // References to the year inputs for clearing
+    const yearARef = useRef(null);
+    const yearBRef = useRef(null);
     
     /**
     Applies the given filters to the search results. The filter values are the
@@ -33,18 +35,10 @@ const Filters = (props) => {
     filters)
     */
     const applyFilters = (before=yearBefore, after=yearAfter, g=genres) => {
-        props.applyFilters(query,
-                           before !== '' ? before : 2000,
-                           after !== '' ? after : 0,
-                           g);
-    };
-    
-    /**
-    Called whenever the user types into the search bar.
-    */
-    const handleQuery = (e) => {
-        setQuery(e.target.value);
-        setShouldClear(false);
+        setQuery(query);
+        filters.setYearBefore(before);
+        filters.setYearAfter(after);
+        filters.setGenres(genres);
     };
     
     /**
@@ -54,7 +48,6 @@ const Filters = (props) => {
     */
     const handleYearBefore = (checked, year) => {
         setYearBefore(checked ? year : '');
-        setShouldClear(false);
     };
     
     /**
@@ -64,15 +57,6 @@ const Filters = (props) => {
     */
     const handleYearAfter = (checked, year) => {
         setYearAfter(checked ? year : '');
-        setShouldClear(false);
-    };
-    
-    /**
-    Updates the genre state. Called whenever a new genre is selected.
-    */
-    const handleGenre = (v) => {
-        setGenres(v);
-        setShouldClear(false);
     };
     
     /**
@@ -80,17 +64,17 @@ const Filters = (props) => {
     'clear filters' button is clicked
     */
     const handleClear = () => {
-        setQuery('');
-        setYearBefore('');
-        setYearAfter('');
+        setQueryText('');
         setGenres([]);
-        setShouldClear(true);
+        yearARef.current.clearInput();
+        yearBRef.current.clearInput();
         
-        applyFilters('', '', []);
+        clearFilters();
     };
     
     const handleApply = () => { applyFilters() };
-    
+    const handleSearchInput = (e) => { setQueryText(e.target.value); };
+    const handleGenre = (v) => { setGenres(v); };
     const toggleCollapse = () => { setCollapsed(!collapsed) };
     
     const FilterIcon = collapsed ? FilterFilled : FilterOutlined;
@@ -103,7 +87,7 @@ const Filters = (props) => {
                     placeholder='Search...'
                     value={query}
                     enterButton
-                    onChange={handleQuery}
+                    onChange={handleSearchInput}
                     onSearch={handleApply} />
                 <Button
                     className='toggle-btn'
@@ -119,11 +103,15 @@ const Filters = (props) => {
                     <YearInput
                         name='Before'
                         onChange={handleYearBefore}
-                        shouldClear={shouldClear} />
+                        applyFilters={applyFilters}
+                        value={yearBefore}
+                        ref={yearBRef} />
                     <YearInput
                         name='After'
                         onChange={handleYearAfter}
-                        shouldClear={shouldClear} />
+                        applyFilters={applyFilters}
+                        value={yearAfter}
+                        ref={yearARef} />
                 </fieldset>
                 <fieldset>
                     <legend>Genre</legend>
@@ -155,37 +143,18 @@ const Filters = (props) => {
 /**
 A checkbox and text field for entering year values.
 */
-const YearInput = (props) => {
-    const [active, setActive] = useState(false);
-    const [year, setYear] = useState('');
+const YearInput = forwardRef((props, ref) => {
+    // Initial value determined by props
+    const [active, setActive] = useState(props.value != '');
+    const [year, setYear] = useState(props.value);
     
-    // Destructured props as suggested by some warning related to useEffect
-    const shouldClear = props.shouldClear;
-    const onChange = props.onChange;
-    
-    /**
-    Pressing the 'clear filters' button sets shouldClear to true. Meanwhile,
-    useEffect is used to monitor the shouldClear variable. Whenever it is set
-    to true, the values are erased. When user input is detected, shouldClear is
-    set back to false.
-    
-    Clever (read: dumb) way to get around changing the year components' state
-    without passing the actual values back and forth. This allows the component
-    to retain 'ownership' of the input values rather than having input trigger
-    a props.onChange function, changing a state value in the parent, and then
-    passing the value of that state back to the component as the current input
-    value to display.
-    
-    AKA I was so lazy that I did more work
-    */
-    useEffect(() => {
-        if (shouldClear) {
+    useImperativeHandle(ref, () => ({
+        clearInput() {
             setYear('');
             setActive(false);
-            
-            onChange(false, '');
+            props.onChange(false, '');
         }
-    }, [shouldClear, onChange]);
+    }));
     
     /**
     Sets the checkbox status. Called whenever the checkbox is modified.
@@ -210,6 +179,13 @@ const YearInput = (props) => {
         props.onChange(checked, val);
     };
     
+    /**
+    Applies the filters when the enter key is pressed.
+    */
+    const handleSubmit = (e) => {
+        props.applyFilters();
+    }
+    
     return (
         <Input.Group className='year-input'>
             <Row>
@@ -226,11 +202,12 @@ const YearInput = (props) => {
                     <Input
                         size='small'
                         onChange={handleInput}
-                        value={year} />
+                        value={year}
+                        onPressEnter={handleSubmit} />
                 </Col>
             </Row>
         </Input.Group>
     );
-}
+});
 
 export default Filters;
