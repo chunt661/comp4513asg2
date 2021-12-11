@@ -16,6 +16,7 @@ import './App.less';
 const App = () => {
     const [ user, setUser ] = useState(null);
     
+    // Load user data
     useEffect(() => {
         const getUserData = async () => {
             try {

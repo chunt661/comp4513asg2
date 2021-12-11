@@ -5,8 +5,8 @@ A spinner to display when loading. HTML and CSS from https://loading.io
 */
 const LoadingSpinner = (props) => {
     return (
-        <div class='lds-spinner-container'>
-            <div class='lds-spinner'><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+        <div className='lds-spinner-container'>
+            <div className='lds-spinner'><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
         </div>
     );
 };

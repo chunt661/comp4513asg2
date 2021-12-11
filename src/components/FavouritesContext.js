@@ -1,5 +1,8 @@
 import { useState, createContext } from 'react';
 
+/**
+Context provider for user's favourites.
+*/
 const FavouritesContextProvider = (props) => {
     const [favourites, setFavourites] = useState([]);
     

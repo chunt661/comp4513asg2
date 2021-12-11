@@ -12,6 +12,7 @@ const { Text } = Typography;
 Play text viewer. Contains the play navigation menu and the play text.
 */
 const PlayViewer = (props) => {
+    // Some values are initially set via props
     const [ currentAct, setAct ] = useState(props.acts[0]);
     const [ currentScene, setScene ] = useState(props.acts[0].scenes[0]);
     const [ currentPlayer, setPlayer ] = useState(null);
@@ -29,7 +30,7 @@ const PlayViewer = (props) => {
     
     // Filter speeches if a player is selected
     const speeches = currentPlayer ?
-            currentScene.speeches.filter(s => s.speaker == currentPlayer)
+            currentScene.speeches.filter(s => s.speaker === currentPlayer)
             : currentScene.speeches;
     
     /**
@@ -48,7 +49,7 @@ const PlayViewer = (props) => {
     first scene in the act, and 'players' is reset to 'all players'.
     */
     const handleActChange = (value) => {
-        const newAct = props.acts.find(a => a.name == value);
+        const newAct = props.acts.find(a => a.name === value);
         setAct(newAct);
         setScene(newAct.scenes[0]); // Set scene to first scene of the act
         setPlayer(null); // Set player to all players
@@ -61,7 +62,7 @@ const PlayViewer = (props) => {
     also reset to 'all players'.
     */
     const handleSceneChange = (value) => {
-        const newScene = currentAct.scenes.find(s => s.name == value);
+        const newScene = currentAct.scenes.find(s => s.name === value);
         setScene(newScene);
         setPlayer(null); // Set player to all players
         

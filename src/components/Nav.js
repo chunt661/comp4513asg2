@@ -2,8 +2,6 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Layout, Button, Menu, Dropdown, Avatar } from 'antd';
 
-import { UserOutlined } from '@ant-design/icons';
-
 import About from './About.js';
 
 import './Nav.css';
@@ -14,6 +12,7 @@ const { Header } = Layout;
 The top nav bar.
 */
 const Nav = (props) => {
+    // Visibility of the 'about' modal
     const [aboutVisible, setAboutVisible] = useState(false);
     
     const openModal = () => { setAboutVisible(true); };

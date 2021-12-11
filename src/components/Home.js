@@ -9,6 +9,9 @@ import './Home.css';
 
 const { Content } = Layout;
 
+/**
+Home page content.
+*/
 const Home = (props) => {
     const { setQuery, clearFilters } = useContext(SearchContext);
     const history = useHistory();

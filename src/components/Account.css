@@ -8,6 +8,10 @@ main#account .title-container * {
     margin-bottom: 0;
 }
 
+main#account .content {
+    padding: var(--padding-lg);
+}
+
 #logout-btn {
     display: block;
     width: 50%;

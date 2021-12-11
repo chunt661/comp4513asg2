@@ -10,7 +10,7 @@ import './PlayItem.css';
 An individual search result item.
 */
 const PlayItem = (props) => {
-    const href = '/play/' + props.play.id;
+    const href = '/play/' + props.play.id; // The link to the play page
     
     return (
         <li className='result'>

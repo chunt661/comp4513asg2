@@ -12,6 +12,8 @@ const { Option } = Select;
 
 /**
 Filter panel. Holds the search filter options and buttons.
+This became pretty messy towards the end of the project and is a good candidate
+to be reworked.
 */
 const Filters = (props) => {
     const { setQuery, filters, clearFilters } = useContext(SearchContext);
@@ -139,13 +141,12 @@ const Filters = (props) => {
     );
 };
 
-
 /**
 A checkbox and text field for entering year values.
 */
 const YearInput = forwardRef((props, ref) => {
     // Initial value determined by props
-    const [active, setActive] = useState(props.value != '');
+    const [active, setActive] = useState(props.value !== '');
     const [year, setYear] = useState(props.value);
     
     useImperativeHandle(ref, () => ({

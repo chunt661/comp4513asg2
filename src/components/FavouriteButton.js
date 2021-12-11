@@ -42,7 +42,7 @@ const FavouriteButton = (props) => {
             shape='circle'
             icon={<Icon style={{
                         opacity: (favourited ? 1 : .66),
-                        fontSize: (props.size == 'large' ? '20pt' : '14pt')
+                        fontSize: (props.size === 'large' ? '20pt' : '14pt')
                     }} />}
             {...(ghost && {ghost: true})}
             />

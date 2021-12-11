@@ -1,5 +1,5 @@
-import { Link, useHistory } from 'react-router-dom';
-import { Layout, Avatar, Space, Button, Typography, Divider, Descriptions, Row, Col } from 'antd';
+import { Layout, Avatar, Space, Button, Typography,
+        Divider, Descriptions, Row, Col } from 'antd';
 import { LikeFilled } from '@ant-design/icons';
 
 import './Account.css';
@@ -8,8 +8,6 @@ const { Content } = Layout;
 const { Title } = Typography;
 
 const Account = (props) => {
-    const history = useHistory();
-    
     /**
     Converts a date to something that is human readable. JavaScript doesn't
     have very robust support for this for some reason, so I have to write this
@@ -42,11 +40,11 @@ const Account = (props) => {
                 size='large'
                 align='center'>
                 <Avatar
-                    src='https://randomuser.me/api/portraits/women/2.jpg'
+                    src={props.user.picture.large}
                     size={96} />
                 <Title>{props.user.details.firstname} {props.user.details.lastname}</Title>
             </Space>
-            <Row>
+            <Row className='content'>
                 <Col span={18}>
                     <Descriptions
                         title='Account Details'
@@ -74,14 +72,14 @@ const Account = (props) => {
                         </Descriptions.Item>
                     </Descriptions>
                 </Col>
+                <Divider />
+                <Button
+                    id='logout-btn'
+                    type='primary'
+                    onClick={handleLogout}>
+                    Logout
+                </Button>
             </Row>
-            <Divider />
-            <Button
-                id='logout-btn'
-                type='primary'
-                onClick={handleLogout}>
-                Logout
-            </Button>
         </Content>
     )
 };
