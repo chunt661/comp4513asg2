@@ -36,7 +36,7 @@
   },
   "scripts": {
     "start": "node server",
-    "build": "craco build & copy ./public/hero.jpg ./build/",
+    "build": "craco build & cp ./public/hero.jpg ./build/",
     "test": "craco test",
     "eject": "react-scripts eject"
   },
