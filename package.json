@@ -32,7 +32,7 @@
     "words": "^0.1.4"
   },
   "scripts": {
-    "start": "craco start",
+    "start": "node server",
     "build": "craco build & copy ./public/hero.jpg ./build/",
     "test": "craco test",
     "eject": "react-scripts eject"
