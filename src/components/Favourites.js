@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Layout, Badge, Button } from 'antd';
 import { HeartOutlined, LeftCircleOutlined,
         RightCircleOutlined, CloseOutlined } from '@ant-design/icons';
-//import { CSSTransitionGroup } from 'react-transition-group';
+import { CSSTransitionGroup } from 'react-transition-group';
 
 import { FavouritesContext } from './FavouritesContext.js';
 
@@ -30,7 +30,12 @@ const Favourites = (props) => {
             width={280}
             >
             <div className='favourites-icon' onClick={handleCollapse}>
+                <CSSTransitionGroup
+                        transitionName='title-grow'
+                        transitionEnterTimeout={300}
+                        transitionLeaveTimeout={300}>
                         {!collapsed && <h2>Favourites</h2>}
+                    </CSSTransitionGroup>
                 <Badge
                     count={collapsed ? favourites.length : 0}
                     size='small'
@@ -48,15 +53,23 @@ const Favourites = (props) => {
             </div>
             { !collapsed &&
                 (<ul>
-                    
+                    <CSSTransitionGroup
+                        transitionName='empty-slide'
+                        transitionEnterTimeout={600}
+                        transitionLeaveTimeout={1}>
                         {
                         favourites.length === 0 &&
                             <li className='empty'>No favourites yet</li>
                         }
-                    
+                    </CSSTransitionGroup>
+                    <CSSTransitionGroup
+                            transitionName='favourite-slide'
+                            transitionEnterTimeout={300}
+                            transitionLeaveTimeout={600}>
                         { favourites.map(f => (
                             <FavouritesItem key={f.id} play={f} />
                         ))}
+                    </CSSTransitionGroup>
                 </ul>)
             }
         </Sider>
