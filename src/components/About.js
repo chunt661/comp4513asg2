@@ -82,7 +82,7 @@ const About = (props) => {
             ]}>
             <h1>shakespea.re: A Shakespeare play browser.</h1>
             <h2>by Chris Hunter</h2>
-            <a href='https://github.com/chunt661/comp4513asg2'>GitHub repository</a>
+            <a href='https://github.com/chunt661/shakespea.re'>GitHub repository</a>
             <Divider />
             <p>shakespea.re is a Shakespeare play browser that contains basic information on most of William Shakespeare's work.</p>
             <p>The front-end was made with React, using components from Ant Design.</p>
