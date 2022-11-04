@@ -7,7 +7,8 @@ https://calm-meadow-94576.herokuapp.com/
 Login with:
 
 **User:** zpochet2@apple.com
-**Pass:** zpochet2@apple.com
+
+**Pass:** mypassword
 
 ## About
 
