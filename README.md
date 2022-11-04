@@ -4,6 +4,8 @@ Chris Hunter
 
 https://calm-meadow-94576.herokuapp.com/
 
+*The website is not mobile friendly :)*
+
 Login with:
 
 **User:** zpochet2@apple.com
