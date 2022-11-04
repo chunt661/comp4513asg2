@@ -4,6 +4,11 @@ Chris Hunter
 
 https://calm-meadow-94576.herokuapp.com/
 
+Login with:
+
+**User:** zpochet2@apple.com
+**Pass:** zpochet2@apple.com
+
 ## About
 
 shakespea.re: A Shakespeare play browser that contains basic information on most of William Shakespeare's work.
