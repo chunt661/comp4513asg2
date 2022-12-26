@@ -4,7 +4,7 @@ Chris Hunter
 
 https://shakespea-re.onrender.com/
 
-*The website is not mobile friendly :)*
+*The website is not mobile friendly as that was out of the scope of this project :)*
 
 Login with:
 
